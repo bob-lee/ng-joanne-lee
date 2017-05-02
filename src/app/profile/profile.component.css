@@ -1,0 +1,18 @@
+.profile { 
+  flex: 1;
+  width: calc(100vw - 0.4em);
+  position: relative;
+}
+
+:host::before {
+  position: absolute;
+  content: '';
+  background-image: url("/assets/img/gallery/raw/Scan7.jpg"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.5;
+}
+

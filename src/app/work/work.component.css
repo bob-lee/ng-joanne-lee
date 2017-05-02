@@ -1,0 +1,26 @@
+/* deep styles for children */
+
+/deep/ .image {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/deep/ .image img {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+/deep/ .image span {
+  width: 60vw;
+  margin-bottom: 2em;
+  font-size: 1.2em;
+}
+
+/deep/ .image1 {
+  /*width: 50vw;*/
+  height: 40vh;
+}

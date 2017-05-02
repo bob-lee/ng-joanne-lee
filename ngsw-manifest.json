@@ -1,0 +1,23 @@
+{
+  "routing": {
+    "index": "/index.html",
+    "routes": {
+      "/": {
+        "prefix": false
+      },
+      "/home": {
+        "prefix": false
+      },
+      "/work": {
+        "prefix": true
+      }
+    }
+  },
+  "external": {
+    "urls": [
+      {
+        "url": "https://fonts.googleapis.com/css?family=Quicksand"
+      }
+    ]
+  }
+}

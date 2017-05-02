@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>NgJoanneLee</title>
@@ -7,8 +8,27 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Quicksand">
+  <script src="https://use.fontawesome.com/098be2bce8.js"></script>
 </head>
+
 <body>
   <app-root>Loading...</app-root>
+
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC_R7ovgPtlph0KbG9jZr4O8gT4GDX5tn4",
+      authDomain: "joanne-lee.firebaseapp.com",
+      databaseURL: "https://joanne-lee.firebaseio.com",
+      projectId: "joanne-lee",
+      storageBucket: "joanne-lee.appspot.com",
+      messagingSenderId: "607430610697"
+    };
+    firebase.initializeApp(config);
+
+  </script>
 </body>
+
 </html>

@@ -1,0 +1,117 @@
+
+:host { 
+  display: flex; 
+  flex-flow: column; 
+  min-height: 100vh;
+}
+
+main {
+  position: relative;
+  flex: 1;
+  background-color: #eee;
+  padding: 0.4em;
+}
+
+
+header {
+  height: 7.5em;
+  background-color: white;
+
+  display: flex;
+  flex-flow: row wrap;
+}
+
+header * {
+  color: rgb(240, 149, 165);
+}
+
+.header-title {
+  flex: 1 100%;
+
+  text-align: center;
+  padding-top: 15px;
+}
+
+.header-title a {
+  text-decoration: none;
+  font-size: calc(100% * 3);
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.header-title-img {
+  height: 0.7em;
+}
+
+.header-menu {
+  flex: 1 100%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+a.header-menu-item,
+label.header-menu-item,
+.header-menu .dropdown-menu > .dropdown a {
+  font-size: 1.4em;
+  line-height: 1.7;
+  padding: 5px;
+  text-decoration: none;
+}
+
+a.header-menu-item.active,
+div.dropdown-menu.active > label,
+.header-menu .dropdown-menu > .dropdown a.active {
+  text-decoration: underline;
+}
+
+.header-menu div.dropdown-menu {
+  position: relative;
+}
+.header-menu .dropdown-menu > input[type=checkbox] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.header-menu .dropdown-menu > div.dropdown {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.header-menu .dropdown-menu > .dropdown li {
+  display: block;
+}
+a.header-menu-item:hover,
+.header-menu .dropdown-menu > input[type=checkbox]:hover + label,
+.header-menu .dropdown-menu > .dropdown a:hover {
+  background: #eee;
+}
+.header-menu .dropdown-menu > div.dropdown {
+  position:absolute;
+  background:white;
+  height:0px;
+  transition: height 0.4s ease;
+  overflow:hidden;
+  z-index: 1;
+  opacity: 0.8;
+}
+.header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ div.dropdown {
+  height: 7.1em;
+}
+.header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ .fa-angle-right {
+  display: none;
+}
+.header-menu .dropdown-menu > input[type=checkbox]:not(:checked) ~ .fa-angle-down {
+  display: none;
+}
+
+footer {
+  background: linear-gradient(#777, #444);
+  color: white;
+  font-size: 0.7em;
+  padding: 0.2em;
+  text-align: center;
+}

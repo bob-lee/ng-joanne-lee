@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  font-family: Arial;
+  margin: 0;
+}
