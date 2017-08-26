@@ -1,0 +1,32 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Joanne Lee",
+  "scope": "/",
+  "display": "standalone",
+  "start_url": "./?utm_source=web_app_manifest",
+  "short_name": "Joanne",
+  "theme_color": "#ffffff",
+  "description": "",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/assets/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+        "src": "/assets/icons/android-chrome-384x384.png",
+        "sizes": "384x384",
+        "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
