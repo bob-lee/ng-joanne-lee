@@ -3,13 +3,13 @@
     "index": "/index.html",
     "routes": {
       "/": {
-        "prefix": false
+        "match": "exact"
       },
       "/home": {
-        "prefix": false
+        "match": "exact"
       },
       "/work": {
-        "prefix": true
+        "match": "prefix"
       }
     }
   },
