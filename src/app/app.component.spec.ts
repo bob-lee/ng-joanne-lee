@@ -15,54 +15,7 @@ import { CraftComponent } from './work/craft.component';
 import { IllustrationComponent } from './work/illustration.component';
 import { PaintingComponent } from './work/painting.component';
 import { GalleryParentComponent } from './gallery/gallery-parent.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { ViewerComponent } from './gallery/viewer.component';
-/*
-describe('AppComponent', () => {
-  const title = 'Joanne Lee';
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        HomeComponent,
-        ProfileComponent,
-        WorkComponent,
-        CraftComponent,
-        IllustrationComponent,
-        PaintingComponent,
-        GalleryParentComponent,
-        GalleryComponent,
-        ViewerComponent,
-      ],
-      imports: [
-        RouterTestingModule.withRoutes(routes)
-      ],
-    });
-    TestBed.compileComponents();
-  });
-
-  it('should create the app', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have title as 'Joanne Lee'`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual(title);
-  }));
-
-  it('should render title in header', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('header div.header-title span a').textContent).toContain(title);
-  }));
-
-});
-*/
 describe('AppComponent (routes)', () => {
   const title = 'Joanne Lee';
 
@@ -96,7 +49,7 @@ describe('AppComponent (routes)', () => {
   }));
 
   // routes
-  it('can navigate to home (async)', async(() => {
+  it('can navigate to \'home\' (async)', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
       .navigate(['/home'])
@@ -105,7 +58,7 @@ describe('AppComponent (routes)', () => {
       }).catch(e => console.log(e));
   }));
 
-  it('can navigate to craft and change titleWork properly', fakeAsync(() => {
+  it('can navigate to \'work/craft\' and change titleWork properly', fakeAsync(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.componentInstance;
     TestBed.get(Router)
@@ -118,7 +71,7 @@ describe('AppComponent (routes)', () => {
     expect(app.titleWork).toBe('craft');
   }));
 
-  it('can navigate to illustration and change titleWork properly', fakeAsync(() => {
+  it('can navigate to \'work/illustration\' and change titleWork properly', fakeAsync(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.componentInstance;
     TestBed.get(Router)
@@ -131,7 +84,7 @@ describe('AppComponent (routes)', () => {
     expect(app.titleWork).toBe('illustration');
   }));
 
-  it('can navigate to painting and change titleWork properly', fakeAsync(() => {
+  it('can navigate to \'work/painting\' and change titleWork properly', fakeAsync(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.componentInstance;
     TestBed.get(Router)
@@ -144,7 +97,7 @@ describe('AppComponent (routes)', () => {
     expect(app.titleWork).toBe('painting');
   }));
 
-  it('can navigate to gallery (async)', async(() => {
+  it('can navigate to \'gallery\' (async)', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
       .navigate(['/work/gallery'])
@@ -153,7 +106,7 @@ describe('AppComponent (routes)', () => {
       }).catch(e => console.log(e));
   }));
 
-  it('default route redirects to home (async)', async(() => {
+  it('should redirect to default route \'home\' (async)', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let router = TestBed.get(Router);
     router.initialNavigation(); // triggers default
