@@ -1,6 +1,12 @@
 <div class="image">
-  <a id="picture1"></a>
+  <!-- <a id="picture1"></a>
   <img src="assets/img/gallery/raw/Scan7.jpg" alt="Picture 1..." class="image1">
-  <span></span>
+  <span></span> -->
 
+  <div *ngFor="let i of imageService.list">
+    <div class="image-pair">
+      <img [src]="i.url" [alt]="i.fileName" (click)="toShowThumb=!toShowThumb" class="image1">
+      <img [src]="i.thumbUrl" [alt]="i.fileName" class="image2" *ngIf="toShowThumb">
+    </div>
+  </div>
 </div>

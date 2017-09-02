@@ -2,8 +2,12 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "@google-cloud/storage": "^0.4.0",
+    "child-process-promise": "^2.2.0",
     "firebase-admin": "~4.2.1",
-    "firebase-functions": "^0.5.7"
+    "firebase-functions": "^0.6.2",
+    "mkdirp": "^0.5.1",
+    "mkdirp-promise": "^4.0.0"
   },
   "private": true
 }

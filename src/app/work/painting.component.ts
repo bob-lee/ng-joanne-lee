@@ -8,6 +8,7 @@ export class PaintingComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.warn(`'PaintingComponent'`);
   }
 
 }
