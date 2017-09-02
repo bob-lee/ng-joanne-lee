@@ -8,6 +8,7 @@ export class CraftComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.warn(`'CraftComponent'`);
   }
 
 }

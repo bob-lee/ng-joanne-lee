@@ -20,7 +20,16 @@
   font-size: 1.2em;
 }
 
+/deep/ .image-pair {
+  position: relative;
+}
+
 /deep/ .image1 {
-  /*width: 50vw;*/
   height: 40vh;
+}
+
+/deep/ .image2 {
+  position: absolute;
+  bottom: 4px;
+  right: -45px;
 }

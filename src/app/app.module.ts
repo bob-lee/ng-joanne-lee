@@ -14,6 +14,7 @@ import { IllustrationComponent } from './work/illustration.component';
 import { PaintingComponent } from './work/painting.component';
 import { GalleryParentComponent } from './gallery/gallery-parent.component';
 import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
+import { ImageService } from './work/image.service';
 
 import 'web-animations-js/web-animations.min';
 import 'hammerjs/hammer';
@@ -69,7 +70,7 @@ export const routes: Routes = [
     Angular2ImageGalleryModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
