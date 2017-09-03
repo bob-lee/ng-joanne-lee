@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { environment } from '../../environments/environment';
 
-// import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/operator/map';
-// import { Subject } from 'rxjs/Subject';
-
 @Injectable()
 export class ImageService {
   app: firebase.app.App;
