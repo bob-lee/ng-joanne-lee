@@ -7,7 +7,6 @@
 :host::before {
   position: absolute;
   content: '';
-  background-image: url("/assets/img/gallery/raw/Scan7.jpg"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
   background-size: cover;
   top: 0;
   left: 0;
@@ -16,3 +15,9 @@
   opacity: 0.5;
 }
 
+.no-webp :host::before {
+  background-image: url("/assets/img/gallery/raw/Scan7.jpg"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
+}
+.webp :host::before {
+  background-image: url("/assets/img/gallery/raw/Scan7.webp"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
+}
