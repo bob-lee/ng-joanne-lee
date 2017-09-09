@@ -5,10 +5,8 @@ import { ImageService } from './image.service';
   templateUrl: './illustration.component.html',
 })
 export class IllustrationComponent implements OnInit {
-  toShowThumb: boolean = true;
 
-  constructor(public imageService: ImageService) {
-  }
+  constructor(public imageService: ImageService) { }
 
   ngOnInit() {
     console.warn(`'IllustrationComponent'`);

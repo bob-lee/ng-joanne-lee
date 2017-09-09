@@ -23,7 +23,7 @@ export class ImageService {
       snapshot.forEach(item => {
         const i = item.val();
         this.list.push(i);
-        console.log(`item: ${item.key} ${i.fileName}`);
+        //console.log(`item: ${item.key} ${i.fileName}`);
       });
 
       console.log(`${path} got ${this.list.length} image(s)`);

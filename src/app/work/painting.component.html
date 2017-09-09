@@ -1,7 +1,16 @@
 <div class="image">
-
-  <a id="picture4"></a>
+  <!-- <a id="picture4"></a>
   <img src="assets/img/gallery/raw/Isaac.png" alt="Picture 4..." class="image1">
-  <span></span>
+  <span></span> -->
 
+  <div *ngFor="let i of imageService.list">
+    <div class="image-pair">
+      <picture>
+        <source type="image/webp" *ngIf="i.webpUrl" [srcset]="i.webpUrl">
+        <img [src]="i.url" alt="" class="image1">
+      </picture>
+
+      <img [src]="i.thumbUrl" class="image2" *ngIf="i.thumbUrl">
+    </div>
+  </div>
 </div>

@@ -30,6 +30,9 @@
 
 /deep/ .image2 {
   position: absolute;
+  height: 40px;
+  width: 40px;
   bottom: 4px;
-  right: -45px;
+  right: -50px;
+  border: 5px solid rgba(255, 255, 255, .3);
 }

@@ -1,9 +1,20 @@
 <div class="image">
-  <a id="picture1"></a>
+  <!-- <a id="picture1"></a>
   <img src="assets/img/gallery/raw/brooch1.jpg" alt="Brooch 1" class="image1">
   <span></span>
 
   <a id="picture2"></a>
   <img src="assets/img/gallery/raw/brooch2.jpg" alt="Quilt small bag" class="image1">
-  <span></span>
+  <span></span> -->
+
+  <div *ngFor="let i of imageService.list">
+    <div class="image-pair">
+      <picture>
+        <source type="image/webp" *ngIf="i.webpUrl" [srcset]="i.webpUrl">
+        <img [src]="i.url" alt="" class="image1">
+      </picture>
+
+      <img [src]="i.thumbUrl" class="image2" *ngIf="i.thumbUrl">
+    </div>
+  </div>
 </div>

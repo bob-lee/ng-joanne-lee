@@ -49,7 +49,7 @@ describe('AppComponent (routes)', () => {
   }));
 
   // routes
-  it('can navigate to \'home\' (async)', async(() => {
+  it(`can navigate to 'home' (async)`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
       .navigate(['/home'])
@@ -58,7 +58,7 @@ describe('AppComponent (routes)', () => {
       }).catch(e => console.log(e));
   }));
 
-  it('can navigate to \'work/craft\' and change titleWork properly', fakeAsync(() => {
+  it(`can navigate to 'work/craft' and change titleWork properly`, fakeAsync(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.componentInstance;
     TestBed.get(Router)
@@ -71,7 +71,7 @@ describe('AppComponent (routes)', () => {
     expect(app.titleWork).toBe('craft');
   }));
 
-  it('can navigate to \'work/illustration\' and change titleWork properly', fakeAsync(() => {
+  it(`can navigate to 'work/illustration' and change titleWork properly`, fakeAsync(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.componentInstance;
     TestBed.get(Router)
@@ -84,7 +84,7 @@ describe('AppComponent (routes)', () => {
     expect(app.titleWork).toBe('illustration');
   }));
 
-  it('can navigate to \'work/painting\' and change titleWork properly', fakeAsync(() => {
+  it(`can navigate to 'work/painting' and change titleWork properly`, fakeAsync(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.componentInstance;
     TestBed.get(Router)
@@ -97,7 +97,7 @@ describe('AppComponent (routes)', () => {
     expect(app.titleWork).toBe('painting');
   }));
 
-  it('can navigate to \'gallery\' (async)', async(() => {
+  it(`can navigate to 'gallery' (async)`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
       .navigate(['/work/gallery'])
@@ -106,7 +106,7 @@ describe('AppComponent (routes)', () => {
       }).catch(e => console.log(e));
   }));
 
-  it('should redirect to default route \'home\' (async)', async(() => {
+  it(`should redirect to default route 'home' (async)`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let router = TestBed.get(Router);
     router.initialNavigation(); // triggers default

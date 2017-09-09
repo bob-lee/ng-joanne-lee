@@ -19,5 +19,5 @@
   background-image: url("/assets/img/gallery/raw/Scan7.jpg"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
 }
 .webp :host::before {
-  background-image: url("/assets/img/gallery/raw/Scan7.webp"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
+  background-image: url("/assets/img/Scan7.jpg.webp"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
 }
