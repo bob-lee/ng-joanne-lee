@@ -19,5 +19,23 @@
         "url": "https://fonts.googleapis.com/css?family=Quicksand"
       }
     ]
+  },
+  "dynamic": {
+    "group": [
+      {
+        "name": "work",
+        "urls": {
+          "https://storage.googleapis.com/joanne-lee.appspot.com": {
+            "match": "prefix"
+          }
+        },
+        "cache": {
+          "optimizeFor": "performance",
+          "strategy": "lru",
+          "maxAgeMs": 360000000,
+          "maxEntries": 40
+        }
+      }
+    ]
   }
 }

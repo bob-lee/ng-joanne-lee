@@ -5,8 +5,12 @@
 
   <div *ngFor="let i of imageService.list">
     <div class="image-pair">
-      <img [src]="i.url" [alt]="i.fileName" (click)="toShowThumb=!toShowThumb" class="image1">
-      <img [src]="i.thumbUrl" [alt]="i.fileName" class="image2" *ngIf="toShowThumb">
+      <picture>
+        <source type="image/webp" *ngIf="i.webpUrl" [srcset]="i.webpUrl">
+        <img [src]="i.url" alt="" class="image1">
+      </picture>
+
+      <img [src]="i.thumbUrl" class="image2" *ngIf="i.thumbUrl">
     </div>
   </div>
 </div>
