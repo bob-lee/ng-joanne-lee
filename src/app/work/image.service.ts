@@ -22,6 +22,7 @@ export class ImageService {
     .once('value').then(snapshot => {
       snapshot.forEach(item => {
         const i = item.val();
+        i.showText = false;
         this.list.push(i);
         //console.log(`item: ${item.key} ${i.fileName}`);
       });

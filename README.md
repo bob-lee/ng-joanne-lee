@@ -4,9 +4,9 @@ This is Joanne's website, shows images of her works. Images are served from the 
 
 - assume the page want to show images in pair - image1 as parent and image2 as child (optional)
 - images are ideally square, crop if required, then optimize using a tool like `tinyjpg.com`
-- optionally prepare `webp` version of image1, name it like `Sarah.jpg.webp`
 - give unique name to image1, e.g. `Sarah.jpg`
 - give unique name to image2, e.g. `of_Sarah.jpg.jpg`
+- optionally prepare `webp` version of image1, name it like `Sarah.jpg.webp`
 
 1. create a folder like `illustration` in `storage`
 2. upload image1 first, `function` to record its url in database.`url`
