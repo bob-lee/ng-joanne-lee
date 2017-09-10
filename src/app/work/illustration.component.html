@@ -1,9 +1,9 @@
-<div class="image">
+<div class="images">
   <!-- <a id="picture1"></a>
   <img src="assets/img/gallery/raw/Scan7.jpg" alt="Picture 1..." class="image1">
   <span></span> -->
 
-  <div *ngFor="let i of imageService.list">
+  <div *ngFor="let i of imageService.list" class="image" (click)="i.showText=!i.showText">
     <div class="image-pair">
       <picture>
         <source type="image/webp" *ngIf="i.webpUrl" [srcset]="i.webpUrl">
@@ -11,6 +11,9 @@
       </picture>
 
       <img [src]="i.thumbUrl" class="image2" *ngIf="i.thumbUrl">
+    </div>
+    <div @expand *ngIf="i.text && i.showText">
+      {{i.text}}
     </div>
   </div>
 </div>
