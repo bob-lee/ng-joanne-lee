@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from './image.service';
-import { expandTrigger } from './work.animation';
+import { pageAnimation } from '../app.animation';
 
 @Component({
   templateUrl: './craft.component.html',
-  animations: [ expandTrigger ]
+  animations: [ pageAnimation ],
+  //host: {'[@pageAnimation]': ''}
 })
 export class CraftComponent implements OnInit {
 

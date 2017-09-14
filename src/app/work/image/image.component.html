@@ -1,0 +1,13 @@
+<div class="image" (click)="image.showText=!image.showText">
+  <div class="image-pair">
+    <picture>
+      <source type="image/webp" *ngIf="image.webpUrl" [srcset]="image.webpUrl">
+      <img [src]="image.url" alt="" class="image1">
+    </picture>
+
+    <img [src]="image.thumbUrl" class="image2" *ngIf="image.thumbUrl">
+  </div>
+  <div @expand *ngIf="image.text && image.showText">
+    {{image.text}}
+  </div>
+</div>
