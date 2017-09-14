@@ -1,0 +1,27 @@
+.image {
+  padding-bottom: 1em;
+}
+
+.image-pair {
+  position: relative;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+span {
+  font-size: 1.2em;
+}
+
+.image1 {
+  /*height: 40vh;*/
+  width: 300px;
+}
+
+.image2 {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  bottom: 4px;
+  right: -50px;
+  border: 5px solid rgba(255, 255, 255, .3);
+}

@@ -1,7 +1,10 @@
 body {
+  /*
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+  */
+
   font-family: Arial;
   margin: 0;
 }

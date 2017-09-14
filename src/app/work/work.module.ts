@@ -6,17 +6,18 @@ import { WorkComponent } from './work.component';
 import { CraftComponent } from './craft.component';
 import { IllustrationComponent } from './illustration.component';
 import { PaintingComponent } from './painting.component';
+import { ImageComponent } from './image/image.component';
 
 import { ImageService } from './image.service';
 
 export const ROUTES: Routes = [
   {
     path: '',
-    component: WorkComponent,
+    component: WorkComponent, 
     children: [
-      { path: 'craft', component: CraftComponent },
-      { path: 'illustration', component: IllustrationComponent },
-      { path: 'painting', component: PaintingComponent }
+      { path: 'craft', component: CraftComponent, data: { state: 'craft'} },
+      { path: 'illustration', component: IllustrationComponent, data: { state: 'illustration'} },
+      { path: 'painting', component: PaintingComponent, data: { state: 'painting'} }
     ]
   }
 ];
@@ -30,7 +31,8 @@ export const ROUTES: Routes = [
     WorkComponent,
     CraftComponent,
     IllustrationComponent,
-    PaintingComponent
+    PaintingComponent,
+    ImageComponent
   ],
   providers: [ ImageService ]
 })

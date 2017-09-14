@@ -1,7 +1,6 @@
 /* deep styles for children */
 
 /deep/ .images {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,29 +8,3 @@
   text-align: center;
 }
 
-/deep/ .images .image {
-  padding-bottom: 1em;
-}
-
-/deep/ .images .image-pair {
-  position: relative;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-/deep/ .images span {
-  font-size: 1.2em;
-}
-
-/deep/ .image1 {
-  height: 40vh;
-}
-
-/deep/ .image2 {
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  bottom: 4px;
-  right: -50px;
-  border: 5px solid rgba(255, 255, 255, .3);
-}

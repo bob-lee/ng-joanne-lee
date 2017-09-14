@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -28,14 +29,12 @@ import 'core-js/es6/regexp';
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
-import 'web-animations-js';
-
 export const ROUTES: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'home', component: HomeComponent, data: { state: 'home'} },
+  { path: 'profile', component: ProfileComponent, data: { state: 'profile'} },
   { path: 'work', loadChildren: './work/work.module#WorkModule' },
-  { path: 'gallery', component: GalleryParentComponent },
+  { path: 'gallery', component: GalleryParentComponent, data: { state: 'gallery'} },
 ];
 
 @NgModule({
@@ -47,6 +46,7 @@ export const ROUTES: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     ServiceWorkerModule,

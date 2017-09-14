@@ -3,11 +3,13 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { NgServiceWorker } from '@angular/service-worker';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import { routerTransition } from './app.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [ routerTransition ],
 })
 export class AppComponent implements OnInit {
   title = 'Joanne Lee';
@@ -62,5 +64,9 @@ export class AppComponent implements OnInit {
   clicked() {
     console.log('clicked');
     this.showIt = !this.showIt;
+  }
+
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
   }
 }
