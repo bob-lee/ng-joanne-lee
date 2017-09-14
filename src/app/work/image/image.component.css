@@ -4,8 +4,6 @@
 
 .image-pair {
   position: relative;
-  margin-top: 0.5em;
-  margin-bottom: 0;
 }
 
 span {
@@ -13,8 +11,7 @@ span {
 }
 
 .image1 {
-  /*height: 40vh;*/
-  width: 300px;
+  width: 310px;
 }
 
 .image2 {

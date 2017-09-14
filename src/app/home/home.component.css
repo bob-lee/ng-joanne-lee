@@ -1,6 +1,5 @@
 
 .image {
-  /*flex: 1 100%;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,16 +9,15 @@
 
 .image img,
 .image picture {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
+  margin-bottom: 0.4em;
 }
 
 .image span {
-  width: 60vw;
-  margin-bottom: 2em;
+  width: 80vw;
+  margin-bottom: 1em;
   font-size: 1.2em;
 }
 
 .image1 {
-  height: 40vh;
+  width: 310px;
 }

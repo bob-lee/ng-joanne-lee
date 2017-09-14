@@ -1,6 +1,6 @@
 /* deep styles for children */
 
-/deep/ .images {
+::ng-deep .images {
   display: flex;
   flex-direction: column;
   justify-content: center;
