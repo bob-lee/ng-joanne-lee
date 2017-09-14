@@ -1,10 +1,6 @@
 
+/* not required, caused slowed touch response on device
 :host { 
-  /*
-  display: flex; 
-  flex-flow: column; 
-  min-height: 100vh;
-  */
   position: fixed;
   top:0;
   left:0;
@@ -13,6 +9,7 @@
   overflow-y:auto;
   overflow-x:hidden;
 }
+*/
 
 main {
   position: relative;
@@ -20,14 +17,6 @@ main {
   background-color: #eee;
   padding: 0.4em;
 }
-/*
-main {
-  position: relative;
-  flex: 1;
-  background-color: #eee;
-  padding: 0.4em;
-}
-*/
 
 header {
   height: 7.5em;
