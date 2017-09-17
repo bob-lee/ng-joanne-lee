@@ -13,13 +13,14 @@
 
 main {
   position: relative;
-  min-height: calc(100vh - 9.4em);
+  min-height: calc(100vh - 8.4em);
   background-color: #eee;
+  background-color: #f6f6f5;
   padding: 0.4em;
 }
 
 header {
-  height: 7.5em;
+  height: 6.5em;
   background-color: white;
   display: flex;
   flex-flow: row wrap;
@@ -33,7 +34,7 @@ header * {
   flex: 1 100%;
 
   text-align: center;
-  padding-top: 15px;
+  padding-top: 5px;
 }
 
 .header-title a {
@@ -69,6 +70,7 @@ div.dropdown-menu.active > label,
 .header-menu .dropdown-menu > .dropdown a.active {
   text-decoration: underline;
   background: #eee;
+  background: #f6f6f5;
 }
 
 div.dropdown-menu.active > label {
@@ -108,7 +110,7 @@ a.header-menu-item:hover,
   opacity: 0.8;
 }
 .header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ div.dropdown {
-  height: 7.1em;
+  height: 9.5em;
 }
 .header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ .fa-angle-right {
   display: none;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { pageAnimation } from '../app.animation';
 
 @Component({
@@ -8,10 +8,27 @@ import { pageAnimation } from '../app.animation';
   //host: {'[@pageAnimation]': ''}
 })
 export class ProfileComponent implements OnInit {
+  state: string = "paused";
+  isTouchDevice: boolean;
+  @ViewChild('background') elementRef: ElementRef;
+  
+  set animationPlayState(state) { this.elementRef.nativeElement.style['animation-play-state'] = state; }
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.isTouchDevice = window.matchMedia("(pointer:coarse)").matches;
+
+    console.warn(`'ProfileComponent' ${this.isTouchDevice}`);
+    //this.animationPlayState = this.state;
+  }
+
+  toggleState() {
+    this.state = this.state === 'paused' ? 'running' : 'paused';
+    
+    if (this.isTouchDevice) {
+      this.animationPlayState = this.state;
+    }
   }
 
 }
