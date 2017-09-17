@@ -3,12 +3,16 @@ import { animate, animation, group, query, stagger, style, transition, trigger, 
 export const expandAnimation = animation([
   style({ overflow: 'hidden', opacity: 0, height: 0 }),
   animate('{{ time }}', style({ opacity: 1, height: '*' }))
-], { params: { time: '0.5s ease-in-out' } });
+], { params: { time: '0.8s ease-in-out' } });
 
-export const shrinkAnimation = animation([
+export const shrinkAnimation = animation([ // why this looks so expensive on ngIf?
   style({ opacity: 1, height: '*' }),
-  animate('{{ time }}', style({ opacity: 0, height: 0, overflow: 'hidden' }))
-], { params: { time: '0.5s ease-in-out' } });
+  group([
+    animate('0.4s', style({ opacity: 0 })),
+    animate('0.8s', style({ height: 0, overflow: 'hidden' }))
+  ])
+  //animate('{{ time }}', style({ opacity: 0, height: 0, overflow: 'hidden' }))
+], { params: { time: '0.8s' } });
 
 export const expandTrigger = trigger('expand', [
   transition(':enter', [

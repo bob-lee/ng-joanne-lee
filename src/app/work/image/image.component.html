@@ -1,13 +1,28 @@
-<div class="image" (click)="image.showText=!image.showText">
+<div class="image" (click)="toggle()">
   <div class="image-pair">
     <picture>
       <source type="image/webp" *ngIf="image.webpUrl" [srcset]="image.webpUrl">
       <img [src]="image.url" alt="" class="image1">
     </picture>
 
-    <img [src]="image.thumbUrl" class="image2" *ngIf="image.thumbUrl">
   </div>
-  <div @expand *ngIf="image.text && image.showText">
-    {{image.text}}
+  <div #showhide class="expand">
+    <span>{{image.text}}</span>
+    <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl">
   </div>
 </div>
+
+<!--
+    @expand [hidden]="!image.showText || !image.text && !image.thumbUrl"
+    <img [src]="image.thumbUrl" class="image2" *ngIf="image.thumbUrl"> 
+<div [hidden]="!toShow" class="expand">
+  <span>{{image.text}}</span>
+  <img class="image2" [src]="image.thumbUrl">
+</div>
+<div @expand *ngIf="toShow" class="expand">
+  <span>{{image.text}}</span>
+  <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl">
+</div>
+
+[style.visibility]="showText ? 'visible' : 'hidden'"
+-->

@@ -52,8 +52,9 @@ export class AppComponent implements OnInit {
 
         this.titleWork = event.url.endsWith('craft') ? 'craft' :
           event.url.endsWith('illustration') ? 'illustration' :
-            event.url.endsWith('painting') ? 'painting' :
-              'work';
+          event.url.endsWith('painting') ? 'painting' :
+          event.url.endsWith('portrait') ? 'portrait' :
+          'work';
 
         if (this.showIt) { // showing
           this.showIt = false; // hide it

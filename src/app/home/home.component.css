@@ -1,23 +1,39 @@
-
-.image {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.home { 
+  display:flex;
+  flex-flow: column;
   align-items: center;
   text-align: center;
 }
 
-.image img,
-.image picture {
-  margin-bottom: 0.4em;
-}
-
-.image span {
-  width: 80vw;
+span {
   margin-bottom: 1em;
-  font-size: 1.2em;
 }
 
-.image1 {
-  width: 310px;
+span, .image1 { /* target mobile portrait first */
+  width: 96vw;
+}
+
+@media only screen /* then target iPad portrait */
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 2) {
+  span, .image1 {
+    width: 70vw;
+  }
+}
+@media only screen /* then target iPad landscape */
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (orientation: landscape) 
+and (-webkit-min-device-pixel-ratio: 2) {
+  span, .image1 {
+    width: 52vw;
+  }
+}
+@media only screen /* then target bigger screen like laptop */
+and (min-device-width: 1024px) {
+  span, .image1 {
+    width: 40vw;
+  }
 }
