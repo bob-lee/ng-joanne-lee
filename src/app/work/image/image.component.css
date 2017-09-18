@@ -6,7 +6,11 @@
   position: relative;
 }
 
-.image1 { 
+.image1 {
+  width: 100%;
+}
+
+.image { 
   width: 96vw;
 }
 
@@ -15,7 +19,7 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px) 
 and (orientation: portrait) 
 and (-webkit-min-device-pixel-ratio: 2) {
-  .image1 {
+  .image {
     width: 70vw;
   }
 }
@@ -24,13 +28,13 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px) 
 and (orientation: landscape) 
 and (-webkit-min-device-pixel-ratio: 2) {
-  .image1 {
+  .image {
     width: 52vw;
   }
 }
 @media only screen 
 and (min-device-width: 1024px) {
-  .image1 {
+  .image {
     width: 40vw;
   }
 }

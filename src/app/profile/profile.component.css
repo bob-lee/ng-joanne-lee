@@ -27,18 +27,21 @@ ul {
   flex: 1;
   position: relative;
 
+  background-image: url("/assets/img/Scan7_600t.jpg");
   background-size: cover;
   opacity: 0.5;
   animation: vertical-scroll 40s linear infinite;
   animation-play-state: paused;
   -webkit-animation-play-state: paused;
 }
+/*
 :host-context(.no-webp) .background {
-  background-image: url("/assets/img/gallery/raw/Scan7.jpg"); /* leading '/' required, https://github.com/angular/angular-cli/issues/4778 */
+  background-image: url("/assets/img/gallery/raw/Scan7.jpg");
 }
 :host-context(.webp) .background {
   background-image: url("/assets/img/Scan7.jpg.webp");
 }
+*/
 .background:hover/*, 
 .background:focus*/ {
   animation-play-state: running;
@@ -55,6 +58,15 @@ ul {
 and (orientation: portrait) {
   .background {
     animation: vertical-scroll 20s linear infinite;
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+  }
+}
+
+@media only screen 
+and (min-width: 415px) {
+  .background {
+    background-image: url("/assets/img/Scan7_800t.jpg");
   }
 }
 

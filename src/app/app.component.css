@@ -44,10 +44,6 @@ header * {
   font-family: 'Quicksand', sans-serif;
 }
 
-.header-title-img {
-  height: 0.7em;
-}
-
 .header-menu {
   flex: 1 100%;
 
@@ -69,7 +65,6 @@ a.header-menu-item.active,
 div.dropdown-menu.active > label,
 .header-menu .dropdown-menu > .dropdown a.active {
   text-decoration: underline;
-  background: #eee;
   background: #f6f6f5;
 }
 
@@ -98,7 +93,7 @@ div.dropdown-menu.active > label {
 a.header-menu-item:hover,
 .header-menu .dropdown-menu > input[type=checkbox]:hover + label,
 .header-menu .dropdown-menu > .dropdown a:hover {
-  background: #eee;
+  background: #f6f6f5;
 }
 .header-menu .dropdown-menu > div.dropdown {
   position:absolute;
@@ -107,17 +102,29 @@ a.header-menu-item:hover,
   transition: height 0.4s ease;
   overflow:hidden;
   z-index: 1;
-  opacity: 0.8;
+  opacity: 1.0;
 }
 .header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ div.dropdown {
   height: 9.5em;
 }
+.header-menu .dropdown-menu > input[type=checkbox] ~ label ~ i {
+  transition: 0.4s ease;
+}
+.header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ i {
+  transform: rotate(90deg);
+}
+.header-menu .dropdown-menu > input[type=checkbox]:not(:checked) ~ label ~ i {
+  transform: rotate(0deg);
+}
+
+/* 
 .header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ .fa-angle-right {
   display: none;
 }
 .header-menu .dropdown-menu > input[type=checkbox]:not(:checked) ~ .fa-angle-down {
   display: none;
-}
+} 
+*/
 
 footer {
   background: linear-gradient(#777, #444);

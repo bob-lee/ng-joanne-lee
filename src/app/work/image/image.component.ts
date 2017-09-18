@@ -23,7 +23,7 @@ export class ImageComponent implements OnInit {
       this.element.style.opacity = 0;
       this.element.style.height = 0;
     }
-    this.height = this.image.thumbUrl ? 80 : this.image.text ? 18 : 0; // value comes from component css
+    this.height = this.image.thumbUrl ? 80 : this.image.text ? 80 : 0; // value comes from component css
   }
 
   toggle() {

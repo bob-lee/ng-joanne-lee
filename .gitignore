@@ -43,3 +43,4 @@ Thumbs.db
 
 # Bob private
 /functions/service-account-credentials.json
+/src/assets/img/gallery/*
