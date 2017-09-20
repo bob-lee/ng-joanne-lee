@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ImageService } from './image.service';
 
 @Component({
-  templateUrl: './illustration.component.html',
+  template: `
+  <div class="images">
+    <my-image [image]="i" *ngFor="let i of imageService.list"></my-image>
+  </div>
+  `,
 })
 export class IllustrationComponent implements OnInit {
 

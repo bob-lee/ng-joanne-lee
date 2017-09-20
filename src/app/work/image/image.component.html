@@ -11,18 +11,3 @@
     <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl">
   </div>
 </div>
-
-<!--
-    @expand [hidden]="!image.showText || !image.text && !image.thumbUrl"
-    <img [src]="image.thumbUrl" class="image2" *ngIf="image.thumbUrl"> 
-<div [hidden]="!toShow" class="expand">
-  <span>{{image.text}}</span>
-  <img class="image2" [src]="image.thumbUrl">
-</div>
-<div @expand *ngIf="toShow" class="expand">
-  <span>{{image.text}}</span>
-  <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl">
-</div>
-
-[style.visibility]="showText ? 'visible' : 'hidden'"
--->

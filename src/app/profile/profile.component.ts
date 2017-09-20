@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
     this.isTouchDevice = window.matchMedia("(pointer:coarse)").matches;
 
     console.warn(`'ProfileComponent' ${this.isTouchDevice}`);
-    //this.animationPlayState = this.state;
   }
 
   toggleState() {

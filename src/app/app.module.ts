@@ -9,8 +9,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { GalleryParentComponent } from './gallery/gallery-parent.component';
-import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
+import { ContactComponent } from './contact/contact/contact.component';
+//import { GalleryParentComponent } from './gallery/gallery-parent.component';
+//import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
 
 import 'web-animations-js/web-animations.min';
 import 'hammerjs/hammer';
@@ -29,12 +30,12 @@ import 'core-js/es6/regexp';
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
-export const ROUTES: Routes = [
+const ROUTES: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, data: { state: 'home'} },
   { path: 'profile', component: ProfileComponent, data: { state: 'profile'} },
   { path: 'work', loadChildren: './work/work.module#WorkModule' },
-  { path: 'gallery', component: GalleryParentComponent, data: { state: 'gallery'} },
+  { path: 'contact', component: ContactComponent, data: { state: 'contact'} },
 ];
 
 @NgModule({
@@ -42,7 +43,8 @@ export const ROUTES: Routes = [
     AppComponent,
     ProfileComponent,
     HomeComponent,
-    GalleryParentComponent
+    //GalleryParentComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ export const ROUTES: Routes = [
     FormsModule,
     HttpModule,
     ServiceWorkerModule,
-    Angular2ImageGalleryModule,
+    //Angular2ImageGalleryModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [],

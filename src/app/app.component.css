@@ -1,22 +1,7 @@
-
-/* not required, caused slowed touch response on device
-:host { 
-  position: fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
-*/
-
 main {
   position: relative;
-  min-height: calc(100vh - 8.4em);
+  min-height: calc(100vh - 7.6em);
   background-color: #eee;
-  background-color: #f6f6f5;
-  padding: 0.4em;
 }
 
 header {
@@ -65,7 +50,8 @@ a.header-menu-item.active,
 div.dropdown-menu.active > label,
 .header-menu .dropdown-menu > .dropdown a.active {
   text-decoration: underline;
-  background: #f6f6f5;
+  background: #eee;
+  border-radius: 0.5em;
 }
 
 div.dropdown-menu.active > label {
@@ -93,7 +79,8 @@ div.dropdown-menu.active > label {
 a.header-menu-item:hover,
 .header-menu .dropdown-menu > input[type=checkbox]:hover + label,
 .header-menu .dropdown-menu > .dropdown a:hover {
-  background: #f6f6f5;
+  background: #eee;
+  border-radius: 0.5em;
 }
 .header-menu .dropdown-menu > div.dropdown {
   position:absolute;
@@ -101,7 +88,7 @@ a.header-menu-item:hover,
   height:0px;
   transition: height 0.4s ease;
   overflow:hidden;
-  z-index: 1;
+  z-index: 2;
   opacity: 1.0;
 }
 .header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ div.dropdown {
@@ -116,15 +103,6 @@ a.header-menu-item:hover,
 .header-menu .dropdown-menu > input[type=checkbox]:not(:checked) ~ label ~ i {
   transform: rotate(0deg);
 }
-
-/* 
-.header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ .fa-angle-right {
-  display: none;
-}
-.header-menu .dropdown-menu > input[type=checkbox]:not(:checked) ~ .fa-angle-down {
-  display: none;
-} 
-*/
 
 footer {
   background: linear-gradient(#777, #444);

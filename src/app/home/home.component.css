@@ -3,6 +3,7 @@
   flex-flow: column;
   align-items: center;
   text-align: center;
+  padding: 0.4em;
 }
 
 span {

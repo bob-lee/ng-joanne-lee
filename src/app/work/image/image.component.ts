@@ -1,12 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { animate, AnimationBuilder, style } from '@angular/animations';
-//import { expandTrigger } from '../work.animation';
 
 @Component({
   selector: 'my-image',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css'],
-  //animations: [ expandTrigger ],
 })
 export class ImageComponent implements OnInit {
 

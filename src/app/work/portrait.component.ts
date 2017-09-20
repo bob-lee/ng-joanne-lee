@@ -8,7 +8,6 @@ import { pageAnimation } from '../app.animation';
     <my-image [image]="i" *ngFor="let i of imageService.list"></my-image>
   </div>
   `,
-  animations: [ pageAnimation ],
 })
 export class PortraitComponent implements OnInit {
   

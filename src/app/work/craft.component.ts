@@ -3,9 +3,11 @@ import { ImageService } from './image.service';
 import { pageAnimation } from '../app.animation';
 
 @Component({
-  templateUrl: './craft.component.html',
-  animations: [ pageAnimation ],
-  //host: {'[@pageAnimation]': ''}
+  template: `
+  <div class="images">
+    <my-image [image]="i" *ngFor="let i of imageService.list"></my-image>
+  </div>
+  `,
 })
 export class CraftComponent implements OnInit {
 
