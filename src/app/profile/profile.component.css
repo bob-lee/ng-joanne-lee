@@ -16,16 +16,17 @@
 .profile .content {
   position: absolute;
   top: 1em;
+  /* max-height: calc(100vh - 7.7em); */
   margin: 0 0.4em;
+  padding: 0.4em;
   background: rgba(253, 250, 243, 0.7);
 	/* border: 1px solid silver; */
   border-radius: .5em;
-  z-index: 1;
+  /*z-index: 1;*/
 }
 
 ul {
-  margin: 0.4em;
-  margin-left: 0;
+  margin-bottom: 0;
 }
 
 @keyframes vertical-scroll {
@@ -51,6 +52,10 @@ and (orientation: portrait) {
 and (min-width: 415px) {
   .profile {
     background-image: url("/assets/img/Scan7_800t.jpg");
+  }
+
+  .profile .content {
+    width: 80vw;
   }
 }
 

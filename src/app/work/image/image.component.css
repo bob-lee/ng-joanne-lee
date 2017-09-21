@@ -38,16 +38,7 @@ and (min-device-width: 1024px) {
     width: 40vw;
   }
 }
-/*
-.image2 {
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  bottom: 4px;
-  right: 0px;
-  border: 5px solid rgba(255, 255, 255, .3);
-}
-*/
+
 .expand {
   display: flex;
   flex-flow: row;

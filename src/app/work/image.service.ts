@@ -24,7 +24,6 @@ export class ImageService {
         const i = item.val();
         i.showText = true;
         this.list.push(i);
-        //console.log(`item: ${item.key} ${i.fileName}`);
       });
 
       console.log(`${path} got ${this.list.length} image(s)`);

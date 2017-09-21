@@ -25,7 +25,6 @@ export class ImageComponent implements OnInit {
   }
 
   toggle() {
-    //console.log('showHide', this.image.showText, this.element.clientHeight);
 
     const showing = this.image.showText;
     this.image.showText = !showing;

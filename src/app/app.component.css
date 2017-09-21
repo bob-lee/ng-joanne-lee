@@ -1,6 +1,6 @@
 main {
   position: relative;
-  min-height: calc(100vh - 7.6em);
+  min-height: calc(100vh - 7.7em);
   background-color: #eee;
 }
 
@@ -44,6 +44,10 @@ label.header-menu-item,
   line-height: 1.7;
   padding: 5px;
   text-decoration: none;
+}
+
+.header-menu .dropdown-menu > .dropdown a {
+  line-height: 1.9;
 }
 
 a.header-menu-item.active,
@@ -91,8 +95,9 @@ a.header-menu-item:hover,
   z-index: 2;
   opacity: 1.0;
 }
+
 .header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ div.dropdown {
-  height: 9.5em;
+  height: 7.9em;
 }
 .header-menu .dropdown-menu > input[type=checkbox] ~ label ~ i {
   transition: 0.4s ease;
@@ -110,4 +115,5 @@ footer {
   font-size: 0.7em;
   padding: 0.2em;
   text-align: center;
+  height: 1.3em;
 }

@@ -1,3 +1,4 @@
+/*
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -40,3 +41,4 @@ export const ROUTES: Routes = [
   providers: [ ImageService ]
 })
 export class WorkModule {}
+*/

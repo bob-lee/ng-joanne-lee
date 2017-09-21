@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from './image.service';
-import { pageAnimation } from '../app.animation';
 
 @Component({
   template: `

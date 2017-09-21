@@ -9,6 +9,15 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { WorkComponent } from './work/work.component';
+//import { CraftComponent } from './work/craft.component';
+import { IllustrationComponent } from './work/illustration.component';
+import { PaintingComponent } from './work/painting.component';
+import { PortraitComponent } from './work/portrait.component';
+import { ImageComponent } from './work/image/image.component';
+
+import { ImageService } from './work/image.service';
+
 import { ContactComponent } from './contact/contact/contact.component';
 //import { GalleryParentComponent } from './gallery/gallery-parent.component';
 //import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
@@ -34,15 +43,31 @@ const ROUTES: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, data: { state: 'home'} },
   { path: 'profile', component: ProfileComponent, data: { state: 'profile'} },
-  { path: 'work', loadChildren: './work/work.module#WorkModule' },
+  //{ path: 'work', loadChildren: './work/work.module#WorkModule' },
+  { 
+    path: 'work',
+    component: WorkComponent,
+    children: [
+      //{ path: 'craft', component: CraftComponent, data: { state: 'craft'} },
+      { path: 'illustration', component: IllustrationComponent, data: { state: 'illustration'} },
+      { path: 'painting', component: PaintingComponent, data: { state: 'painting'} },
+      { path: 'portrait', component: PortraitComponent, data: { state: 'portrait'} },
+    ]
+  },
   { path: 'contact', component: ContactComponent, data: { state: 'contact'} },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
     HomeComponent,
+    ProfileComponent,
+    WorkComponent,
+    ImageComponent,
+    IllustrationComponent,
+    PaintingComponent,
+    PortraitComponent,
+
     //GalleryParentComponent,
     ContactComponent
   ],
@@ -53,9 +78,9 @@ const ROUTES: Routes = [
     HttpModule,
     ServiceWorkerModule,
     //Angular2ImageGalleryModule,
-    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES/*, { preloadingStrategy: PreloadAllModules }*/)
   ],
-  providers: [],
+  providers: [ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

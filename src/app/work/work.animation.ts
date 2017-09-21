@@ -1,3 +1,4 @@
+/*
 import { animate, animation, group, query, stagger, style, transition, trigger, useAnimation } from '@angular/animations';
 
 export const expandAnimation = animation([
@@ -22,3 +23,4 @@ export const expandTrigger = trigger('expand', [
     useAnimation(shrinkAnimation)
   ])
 ]);
+*/
