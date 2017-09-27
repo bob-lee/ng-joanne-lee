@@ -4,7 +4,7 @@ import { routerTransition, pageAnimation } from '../app.animation';
 
 @Component({
   template: `
-  <div [@routerTransition]="getState(o)">
+  <div [@routerTransition]="getState(o)" style="background-color: #eee;">
 	  <router-outlet #o="outlet"></router-outlet>
   </div>
   `,
