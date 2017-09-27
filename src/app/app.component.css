@@ -24,7 +24,7 @@ header * {
 
 .header-title a {
   text-decoration: none;
-  font-size: calc(100% * 3);
+  font-size: 300%;
   font-weight: bold;
   font-family: 'Quicksand', sans-serif;
 }
