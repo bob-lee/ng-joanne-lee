@@ -14,7 +14,7 @@ import { routerTransition } from './app.animation';
 export class AppComponent implements OnInit {
   title = 'Joanne Lee';
   titleWork = 'work';
-  showIt: boolean = false; // hide it
+  //showIt: boolean = false; // hide it
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -55,17 +55,19 @@ export class AppComponent implements OnInit {
           event.url.endsWith('painting') ? 'painting' :
           event.url.endsWith('portrait') ? 'portrait' :
           'work';
-
+        /*
         if (this.showIt) { // showing
           this.showIt = false; // hide it
         }
+        */
       });
   }
-
+  /*
   clicked() {
     console.log('clicked');
     this.showIt = !this.showIt;
   }
+  */
 
   getState(outlet) {
     return outlet.activatedRouteData.state;

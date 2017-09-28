@@ -39,33 +39,33 @@ header * {
 
 a.header-menu-item,
 label.header-menu-item,
-.header-menu .dropdown-menu > .dropdown a {
+.header-menu .ddm > .dropdown a {
   font-size: 1.4em;
   line-height: 1.7;
   padding: 5px;
   text-decoration: none;
 }
 
-.header-menu .dropdown-menu > .dropdown a {
+.header-menu .ddm > .dropdown a {
   line-height: 1.9;
 }
 
 a.header-menu-item.active,
-div.dropdown-menu.active > label,
-.header-menu .dropdown-menu > .dropdown a.active {
+div.ddm.active > label,
+.header-menu .ddm > .dropdown a.active {
   text-decoration: underline;
   background: #eee;
   border-radius: 0.5em;
 }
 
-div.dropdown-menu.active > label {
+div.ddm.active > label {
   padding: 9px 5px;
 }
 
-.header-menu div.dropdown-menu {
+.header-menu div.ddm {
   position: relative;
 }
-.header-menu .dropdown-menu > input[type=checkbox] {
+.header-menu .ddm > input[type=checkbox] {
   position: absolute;
   top: 0;
   left: 0;
@@ -73,20 +73,20 @@ div.dropdown-menu.active > label {
   height: 100%;
   opacity: 0;
 }
-.header-menu .dropdown-menu > div.dropdown {
+.header-menu .ddm > div.dropdown {
   padding-left: 8px;
   padding-right: 8px;
 }
-.header-menu .dropdown-menu > .dropdown li {
+.header-menu .ddm > .dropdown li {
   display: block;
 }
 a.header-menu-item:hover,
-.header-menu .dropdown-menu > input[type=checkbox]:hover + label,
-.header-menu .dropdown-menu > .dropdown a:hover {
+.header-menu .ddm > input[type=checkbox]:hover + label,
+.header-menu .ddm > .dropdown a:hover {
   background: #eee;
   border-radius: 0.5em;
 }
-.header-menu .dropdown-menu > div.dropdown {
+.header-menu .ddm > div.dropdown {
   position:absolute;
   background:white;
   height:0px;
@@ -96,16 +96,16 @@ a.header-menu-item:hover,
   opacity: 1.0;
 }
 
-.header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ div.dropdown {
+.header-menu .ddm > input[type=checkbox]:checked ~ label ~ div.dropdown {
   height: 7.9em;
 }
-.header-menu .dropdown-menu > input[type=checkbox] ~ label ~ i {
+.header-menu .ddm > input[type=checkbox] ~ label ~ i {
   transition: 0.4s ease;
 }
-.header-menu .dropdown-menu > input[type=checkbox]:checked ~ label ~ i {
+.header-menu .ddm > input[type=checkbox]:checked ~ label ~ i {
   transform: rotate(90deg);
 }
-.header-menu .dropdown-menu > input[type=checkbox]:not(:checked) ~ label ~ i {
+.header-menu .ddm > input[type=checkbox]:not(:checked) ~ label ~ i {
   transform: rotate(0deg);
 }
 

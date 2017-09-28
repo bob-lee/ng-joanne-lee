@@ -20,7 +20,7 @@ export const routerTransition = trigger('routerTransition', [
 
 export const pageAnimation = trigger('pageAnimation', [
   transition(':enter', [
-    query('span, img, :host::before', [
+    query('span, img', [
       style({ transform: 'scale(0)' }),
       animate('1s', style('*'))
     ], {optional:true})
