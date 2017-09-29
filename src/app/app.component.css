@@ -38,21 +38,15 @@ header * {
 }
 
 a.header-menu-item,
-label.header-menu-item,
-.header-menu .ddm > .dropdown a {
+label.header-menu-item {
   font-size: 1.4em;
   line-height: 1.7;
   padding: 5px;
   text-decoration: none;
 }
 
-.header-menu .ddm > .dropdown a {
-  line-height: 1.9;
-}
-
 a.header-menu-item.active,
-div.ddm.active > label,
-.header-menu .ddm > .dropdown a.active {
+div.ddm.active > label {
   text-decoration: underline;
   background: #eee;
   border-radius: 0.5em;
@@ -73,20 +67,13 @@ div.ddm.active > label {
   height: 100%;
   opacity: 0;
 }
-.header-menu .ddm > div.dropdown {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-.header-menu .ddm > .dropdown li {
-  display: block;
-}
 a.header-menu-item:hover,
-.header-menu .ddm > input[type=checkbox]:hover + label,
-.header-menu .ddm > .dropdown a:hover {
+.header-menu .ddm > input[type=checkbox]:hover + label {
   background: #eee;
   border-radius: 0.5em;
 }
-.header-menu .ddm > div.dropdown {
+
+.ddm .dd {
   position:absolute;
   background:white;
   height:0px;
@@ -94,11 +81,28 @@ a.header-menu-item:hover,
   overflow:hidden;
   z-index: 2;
   opacity: 1.0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.ddm > input[type=checkbox]:checked ~ label ~ div.dd {
+  height: 9em;
+}
+.ddm > .dd a {
+  font-size: 1.4em;
+  padding: 0 12px;
+  text-decoration: none;
+  line-height: 1.9;
+}
+.ddm > .dd a:hover,
+.ddm > .dd a.active {
+  background: #eee;
+}
+.ddm > .dd a.active {
+  text-decoration: underline;
 }
 
-.header-menu .ddm > input[type=checkbox]:checked ~ label ~ div.dropdown {
-  height: 7.9em;
-}
 .header-menu .ddm > input[type=checkbox] ~ label ~ i {
   transition: 0.4s ease;
 }

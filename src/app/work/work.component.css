@@ -1,6 +1,4 @@
-/* deep styles for children */
-
-::ng-deep .images {
+.images {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,3 +7,36 @@
   padding: 0.4em;
 }
 
+.submenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.4em;
+  padding: 0 0.1em 0.2em;
+}
+.submenu * {
+  padding: 5px;
+}
+.submenu a {
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+.submenu a.hide {
+  z-index: -1;
+}
+.submenu a:active {
+  background: none;
+}
+.submenu a:hover {
+  background: #ddd;
+}
+
+@media (pointer: coarse) {
+  .submenu a:active {
+    background: #ddd;
+  }
+  
+  .submenu a:hover {
+    background: none;
+  }
+}
