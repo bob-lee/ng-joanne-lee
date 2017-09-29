@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { animate, AnimationBuilder, style } from '@angular/animations';
 
 @Component({
@@ -9,6 +9,9 @@ import { animate, AnimationBuilder, style } from '@angular/animations';
 export class ImageComponent implements OnInit {
 
   @Input() image: any;
+  @Output() load: EventEmitter<any> = new EventEmitter();
+  imageLoaded: boolean = false;
+
   @ViewChild('showhide') showHideEl: ElementRef;
   height: number;
   element: any;
@@ -21,7 +24,12 @@ export class ImageComponent implements OnInit {
       this.element.style.opacity = 0;
       this.element.style.height = 0;
     }
-    this.height = this.image.thumbUrl ? 80 : this.image.text ? 80 : 0; // value comes from component css
+    this.height = this.image.thumbUrl ? 80 : this.image.text ? 80 : 0; // value copied from component css
+  }
+
+  loaded(image) {
+    this.imageLoaded = true;
+    this.load.emit(image.fileName);
   }
 
   toggle() {

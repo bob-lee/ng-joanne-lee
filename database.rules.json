@@ -4,6 +4,12 @@
     ".write": true,
     "illustration": {
       ".indexOn": ["fileName"]
+    },
+    "painting": {
+      ".indexOn": ["fileName"]
+    },
+    "portrait": {
+      ".indexOn": ["fileName"]
     }
   }
 }

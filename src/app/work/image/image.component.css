@@ -1,5 +1,14 @@
 .image {
   padding-bottom: 1em;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 1.0s linear, opacity 1.0s linear;
+}
+
+.image.show {
+  visibility: visible;;
+  opacity: 1;
 }
 
 .image-pair {
