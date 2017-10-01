@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
-import { environment } from '../../environments/environment';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+// import * as firebase from 'firebase';
+// import { environment } from '../../environments/environment';
 
 const PAGE_SIZE = 5; // 5 items in a page
+const API = 'https://us-central1-joanne-lee.cloudfunctions.net/getUrls';
 /*
 export enum OrderBy {
   key,
@@ -12,8 +15,8 @@ export enum OrderBy {
 
 @Injectable()
 export class ImageService {
-  app: firebase.app.App;
-  db: firebase.database.Database;
+  // app: firebase.app.App;
+  // db: firebase.database.Database;
   list: any[] = [];
   show: any[] = []; // paged subset of list to show
   group: string;
@@ -22,23 +25,24 @@ export class ImageService {
   get hasPrev() { return this.list.length > 0 && this.page > 1; }
   get hasMore() { return this.list.length > 0 && this.page < this.pages; }
 
-  constructor() {
+  constructor(private http: Http) {
     console.warn(`'image.service'`); // watch when / how often the service is instantiated
-    this.app = firebase.initializeApp(environment.firebase);
-    this.db = firebase.database();
+    // this.app = firebase.initializeApp(environment.firebase);
+    // this.db = firebase.database();
   }
 
-  getUrls(path: string, page: number = 1): firebase.Promise<any> {
-    return this.getFullList(path || this.group).then(() => {
+  getUrls(path: string, page: number = 1): /*firebase.*/Promise<any> {
+    return this.getFullList2(path || this.group).then(() => {
       if (page > this.pages) page = 1;
       const begin = (page - 1) * PAGE_SIZE;
       this.show = this.list.slice(begin, begin + PAGE_SIZE);
       this.page = page;
 
       console.log(`getUrls(${page}/${this.pages}, ${this.show.length})`);
+      //this.getFullList2(path || this.group);
     });
   }
-
+  /*
   private getFullList(path: string): firebase.Promise<any[]> {
     if (path === this.group && this.list.length > 0)
       return firebase.Promise.resolve(this.list);
@@ -59,6 +63,23 @@ export class ImageService {
 
         console.log(`getFullList(${path}) got ${this.list.length} image(s)`);
       });
+  }
+  */
+  private getFullList2(path: string): Promise<any> {
+    if (path === this.group && this.list.length > 0)
+      return Promise.resolve(this.list);
+
+    return this.http.get(`${API}/${path}`).toPromise().then((snapshot) => {
+      this.list = [];
+
+      const items = snapshot.json();
+      this.list = items.reverse();
+      this.group = path;
+      this.pages = Math.ceil(this.list.length / PAGE_SIZE);
+
+      console.log(`getFullList2(${path}) got ${this.list.length} image(s)`);
+      return this.list;
+    });
   }
 
   /*

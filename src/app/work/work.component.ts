@@ -65,10 +65,4 @@ export class WorkComponent implements OnInit {
     // if (header) header.scrollIntoView();
     window.scrollTo(0, 0);
   }
-
-  /*
-  getState(outlet) {
-    return outlet.activatedRouteData.state;
-  }
-  */
 }
