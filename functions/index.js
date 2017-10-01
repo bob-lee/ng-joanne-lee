@@ -20,6 +20,7 @@ const mkdirp = require('mkdirp-promise');
 // Include a Service Account Key to use a Signed URL
 const gcs = require('@google-cloud/storage')({ keyFilename: 'service-account-credentials.json' });
 const admin = require('firebase-admin');
+const cors = require('cors')({origin: true});
 admin.initializeApp(functions.config().firebase);
 const spawn = require('child-process-promise').spawn;
 const path = require('path');
@@ -107,49 +108,6 @@ exports.recordUrl = functions.storage.object().onChange(event => {
       });
     }
 
-    /*
-    // assumes image1 is not webp, convert to webp // won't work until this issue fixed: https://github.com/firebase/functions-samples/issues/128
-    const thumbFilePath = path.normalize(path.join(fileDir, `${fileName.split('.').slice(0, -1).join('.')}.${WEBP_EXT}`)); // 'Sarah.jpg' => 'Sarah.webp'
-    const tempLocalFile = path.join(os.tmpdir(), filePath);
-    const tempLocalDir = path.dirname(tempLocalFile);
-    const tempLocalThumbFile = path.join(os.tmpdir(), thumbFilePath);
-
-    const thumbFile = bucket.file(thumbFilePath);
-
-    // Create the temp directory where the storage file will be downloaded.
-    return mkdirp(tempLocalDir).then(() => {
-      // Download file from bucket.
-      return file.download({ destination: tempLocalFile });
-    }).then(() => {
-      console.log('The file has been downloaded to', tempLocalFile);
-      // Generate a thumbnail using ImageMagick.
-      return spawn('convert', [tempLocalFile, '-quality', `${WEBP_QUALITY}>`, tempLocalThumbFile]);
-    }).then(() => {
-      console.log('Thumbnail created at', tempLocalThumbFile);
-      // Uploading the Thumbnail.
-      return bucket.upload(tempLocalThumbFile, { destination: thumbFilePath });
-    }).then(() => {
-      console.log('Thumbnail uploaded to Storage at', thumbFilePath);
-      // Once the image has been uploaded delete the local files to free up disk space.
-      fs.unlinkSync(tempLocalFile);
-      fs.unlinkSync(tempLocalThumbFile);
-
-      return Promise.all([
-        thumbFile.getSignedUrl(config),
-        file.getSignedUrl(config)
-      ]);
-    }).then(results => {
-      const thumbResult = results[0];
-      const originalResult = results[1];
-      const thumbFileUrl = thumbResult[0];
-      const fileUrl = originalResult[1];
-      console.log(`got signed URLs`);
-
-      // Add the URLs to the Database
-      admin.database().ref(fileDir).push({ fileName: fileName, url: thumbFileUrl, fallbackUrl: fileUrl })
-        .then(_ => console.log(`recorded urls of '${fileName}' ok`));
-    }).catch(error => console.error('image1', error));
-    */
   }
 
   // image 2 uploaded, convert to thumb, record its url into database.thumbUrl
@@ -215,4 +173,22 @@ exports.recordUrl = functions.storage.object().onChange(event => {
     .then(_ => console.log(`removed file '${fileName}' ok`))
     .catch(error => console.error('image2', error));
 
+});
+
+exports.getUrls = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    const params = req.url.split('/');
+    const group = params[1];
+  
+    admin.database().ref(group).once('value')
+      .then(snapshot => {
+        const list = [];
+        snapshot.forEach(item => {
+          const i = item.val();
+          list.push(i);
+        });
+        //console.log('getUrls', group, list.length);
+        res.status(200).json(list);
+      });
+  });
 });

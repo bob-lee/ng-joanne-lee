@@ -22,18 +22,6 @@ const ROUTES: Routes = [
   { path: 'home', component: HomeComponent, data: { state: 'home'} },
   { path: 'profile', component: ProfileComponent, data: { state: 'profile'} },
   { path: 'work/:name', component: WorkComponent, data: { state: 'work'} },
-  //{ path: 'work', loadChildren: './work/work.module#WorkModule' },
-  /*
-  { 
-    path: 'work',
-    component: WorkComponent,
-    children: [
-      { path: 'illustration', component: IllustrationComponent, data: { state: 'illustration'} },
-      { path: 'painting', component: PaintingComponent, data: { state: 'painting'} },
-      { path: 'portrait', component: PortraitComponent, data: { state: 'portrait'} },
-    ]
-  },
-  */
   { path: 'contact', component: ContactComponent, data: { state: 'contact'} },
 ];
 
@@ -52,7 +40,7 @@ const ROUTES: Routes = [
     FormsModule,
     HttpModule,
     ServiceWorkerModule,
-    RouterModule.forRoot(ROUTES/*, { preloadingStrategy: PreloadAllModules }*/)
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [ImageService],
   bootstrap: [AppComponent]
