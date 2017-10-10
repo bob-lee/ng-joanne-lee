@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    /*
     if ('serviceWorker' in navigator)
       this.sw = true;
+    */
   }
 
 }

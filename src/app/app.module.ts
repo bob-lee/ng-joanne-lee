@@ -11,11 +11,12 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WorkComponent } from './work/work.component';
 import { ImageComponent } from './work/image/image.component';
+import { SubmenuComponent } from './work/submenu/submenu.component';
 
 import { ImageService } from './work/image.service';
 
 import { ContactComponent } from './contact/contact/contact.component';
-import 'hammerjs/hammer';
+//import 'hammerjs/hammer';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,14 +33,15 @@ const ROUTES: Routes = [
     ProfileComponent,
     WorkComponent,
     ImageComponent,
+    SubmenuComponent,
     ContactComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,//.withServerTransition({appId: 'joanne-lee'}),
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    ServiceWorkerModule,
+    ServiceWorkerModule.register('/ngsw-worker.js'),
     RouterModule.forRoot(ROUTES)
   ],
   providers: [ImageService],

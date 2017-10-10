@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { NgServiceWorker } from '@angular/service-worker';
+//import { NgServiceWorker } from '@angular/service-worker';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import { routerTransition } from './app.animation';
@@ -17,32 +17,32 @@ export class AppComponent implements OnInit {
   //showIt: boolean = false; // hide it
 
   constructor(private router: Router,
-    private activatedRoute: ActivatedRoute,
-    public sw: NgServiceWorker) { 
+    private activatedRoute: ActivatedRoute/*,
+  public sw: NgServiceWorker*/) { 
 
     }
 
   ngOnInit() {
     // gentle app update flow
-    this.sw.updates.subscribe(event => {
-      console.log('sw.updates:', event.type, event);
-      /*
+    // this.sw.updates.subscribe(event => {
+    //   console.log('sw.updates:', event.type, event);
+    //   /*
 
-      if (event.type === 'pending') {
-        // ask user if they want to update?
-        let agreeToUpdate: boolean = true;
-        if (agreeToUpdate) {
-          sw.activateUpdate(event.version);
-        }
+    //   if (event.type === 'pending') {
+    //     // ask user if they want to update?
+    //     let agreeToUpdate: boolean = true;
+    //     if (agreeToUpdate) {
+    //       sw.activateUpdate(event.version);
+    //     }
 
-      } else {
-        // event type === 'activation
-        // MGSW is now serving a new version
-        location.reload();
-      }
-      */
+    //   } else {
+    //     // event type === 'activation
+    //     // MGSW is now serving a new version
+    //     location.reload();
+    //   }
+    //   */
 
-    });
+    // });
 
 
     this.router.events

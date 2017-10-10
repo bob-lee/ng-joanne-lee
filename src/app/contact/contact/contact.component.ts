@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
@@ -8,10 +9,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class ContactComponent implements OnInit {
   @ViewChild('phone') elRef: ElementRef;
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: string) { }
 
   ngOnInit() {
-    if (!window.matchMedia("(pointer:coarse)").matches) {
+    if (isPlatformBrowser(this.platformId) && !window.matchMedia("(pointer:coarse)").matches) {
       this.elRef.nativeElement.removeAttribute('href');
     }
   }

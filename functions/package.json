@@ -2,13 +2,30 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "@angular/animations": "^4.4.3",
+    "@angular/common": "^4.4.3",
+    "@angular/compiler": "^4.4.3",
+    "@angular/core": "^4.4.3",
+    "@angular/forms": "^4.4.3",
+    "@angular/http": "^4.4.3",
+    "@angular/platform-browser": "^4.4.3",
+    "@angular/platform-browser-dynamic": "^4.4.3",
+    "@angular/platform-server": "^4.4.3",
+    "@angular/router": "^4.4.3",
     "@google-cloud/storage": "^0.4.0",
+    "angular-universal-express-firebase": "0.0.4",
     "child-process-promise": "^2.2.0",
+    "core-js": "^2.4.1",
     "cors": "^2.8.4",
+    "express": "^4.15.3",
     "firebase-admin": "~4.2.1",
     "firebase-functions": "^0.6.3",
     "mkdirp": "^0.5.1",
-    "mkdirp-promise": "^4.0.0"
+    "mkdirp-promise": "^4.0.0",
+    "path": "^0.12.7",
+    "rxjs": "^5.4.2",
+    "web-animations-js": "^2.3.1",
+    "zone.js": "^0.8.14"
   },
   "private": true
 }

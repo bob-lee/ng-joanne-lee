@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { routerTransition, pageAnimation } from '../app.animation';
 import { ImageService } from './image.service';
@@ -10,17 +11,19 @@ import { ImageService } from './image.service';
 [ngClass]="{'show': imagesLoaded}"
     <pre>{{imagesLoaded}} {{count}} {{loadedImages}}</pre>
 
-*/
-@Component({
-  template: `
-    <div class="images">
-      <my-image [image]="i" *ngFor="let i of imageService.show" (load)="loaded($event)"></my-image>
-    </div>
     <div class="submenu" *ngIf="imagesLoaded">
       <a [ngClass]="{'hide': !imageService.hasPrev}" (click)="page(false)">< prev</a>
       <span>{{imageService.page}}/{{imageService.pages}}</span>
       <a [ngClass]="{'hide': !imageService.hasMore}" (click)="page()">more ></a>
     </div>
+*/
+@Component({
+  template: `
+    <submenu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></submenu>
+    <div class="images">
+      <my-image [image]="i" *ngFor="let i of imageService.show" (load)="loaded($event)"></my-image>
+    </div>
+    <submenu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></submenu>
   `,
   styleUrls: ['./work.component.css'],
   animations: [routerTransition, pageAnimation],
@@ -33,7 +36,8 @@ export class WorkComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public imageService: ImageService) { }
+    public imageService: ImageService,
+    @Inject(PLATFORM_ID) private platformId: string) { }
 
   ngOnInit() {
     console.warn(`'WorkComponent'`);
@@ -61,8 +65,10 @@ export class WorkComponent implements OnInit {
     this.loadedImages = 0;
     this.imageService.getUrls(path, page);
 
-    // const header = document.querySelector('header');
-    // if (header) header.scrollIntoView();
-    window.scrollTo(0, 0);
+    if (isPlatformBrowser(this.platformId)) {
+      // const header = document.querySelector('header');
+      // if (header) header.scrollIntoView();
+      window.scrollTo(0, 0);
+    }
   }
 }
