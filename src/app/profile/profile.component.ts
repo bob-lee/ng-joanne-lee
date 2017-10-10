@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { pageAnimation } from '../app.animation';
 
 @Component({
@@ -14,10 +15,10 @@ export class ProfileComponent implements OnInit {
   
   set animationPlayState(state) { this.elementRef.nativeElement.style['animation-play-state'] = state; }
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: string) { }
 
   ngOnInit() { 
-    this.isTouchDevice = window.matchMedia("(pointer:coarse)").matches;
+    this.isTouchDevice = isPlatformBrowser(this.platformId) ? window.matchMedia("(pointer:coarse)").matches : true;
 
     console.warn(`'ProfileComponent' ${this.isTouchDevice}`);
   }
