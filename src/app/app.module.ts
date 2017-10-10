@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WorkComponent } from './work/work.component';
 import { ImageComponent } from './work/image/image.component';
+import { SubmenuComponent } from './work/submenu/submenu.component';
 
 import { ImageService } from './work/image.service';
 
@@ -32,6 +33,7 @@ const ROUTES: Routes = [
     ProfileComponent,
     WorkComponent,
     ImageComponent,
+    SubmenuComponent,
     ContactComponent
   ],
   imports: [
