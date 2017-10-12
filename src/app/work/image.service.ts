@@ -26,7 +26,7 @@ export class ImageService {
   get hasMore() { return this.list.length > 0 && this.page < this.pages; }
 
   constructor(private http: Http) {
-    console.warn(`'image.service'`); // watch when / how often the service is instantiated
+    console.info(`'image.service'`); // watch when / how often the service is instantiated
     // this.app = firebase.initializeApp(environment.firebase);
     // this.db = firebase.database();
   }

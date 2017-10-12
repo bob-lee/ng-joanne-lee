@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { pageAnimation } from '../app.animation';
+import { PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   templateUrl: './home.component.html',
@@ -10,10 +12,10 @@ import { pageAnimation } from '../app.animation';
 export class HomeComponent implements OnInit {
   sw: boolean = false;
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: string) { }
 
   ngOnInit() {
-    if ('serviceWorker' in navigator)
+    if (isPlatformBrowser(this.platformId) && 'serviceWorker' in navigator)
       this.sw = true;
   }
 

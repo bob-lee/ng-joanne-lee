@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() { 
     this.isTouchDevice = isPlatformBrowser(this.platformId) ? window.matchMedia("(pointer:coarse)").matches : true;
 
-    console.warn(`'ProfileComponent' ${this.isTouchDevice}`);
+    console.info(`'ProfileComponent' isTouchDevice=${this.isTouchDevice}`);
   }
 
   toggleState() {

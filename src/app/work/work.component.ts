@@ -35,7 +35,7 @@ export class WorkComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: string) { }
 
   ngOnInit() {
-    console.warn(`'WorkComponent'`);
+    console.info(`'WorkComponent'`);
 
     this.route.params.subscribe(params => {
       const group = params['name'];

@@ -1,5 +1,16 @@
 'use strict';
 
+const angularUniversal = require('angular-universal-express-firebase');
+exports.trigger = angularUniversal.trigger({
+  index: __dirname + '/dist/index.html',
+  // make sure this points at the correct hash, or use the --output-hashing none flag on your ng build.
+  main: __dirname + '/dist/main.bundle',
+  enableProdMode: true,
+  cdnCacheExpiry: 600, // cache in the CDN for 10 minutes
+  browserCacheExpiry: 300, // cache in the browser for 5 minutes
+  staleWhileRevalidate: 120 // serve a stale version for 2 minutes after cdnCacheExpiry, but refresh CDN in background
+});
+
 /* image file naming / uploading convention
 
   0. assume the page want to show images in pair - image1 as parent and image2 as child (optional)
@@ -18,7 +29,7 @@
 const functions = require('firebase-functions');
 const mkdirp = require('mkdirp-promise');
 // Include a Service Account Key to use a Signed URL
-const gcs = require('@google-cloud/storage')({ keyFilename: 'service-account-credentials.json' });
+//const gcs = require('@google-cloud/storage')({ keyFilename: 'service-account-credentials.json' });
 const admin = require('firebase-admin');
 const cors = require('cors')({origin: true});
 admin.initializeApp(functions.config().firebase);
@@ -34,7 +45,7 @@ const CONVERT_PREFIX = 'of_'; // image2 file would have this prefix, e.g. 'of_Sa
 const THUMB_PREFIX = 'thumb_'; // converted thumb file of image2 would have this prefix, e.g. 'thumb_of_Sarah.jpg.jpg'
 const WEBP_EXT = 'webp';
 const WEBP_QUALITY = 80;
-
+/*
 exports.recordUrl = functions.storage.object().onChange(event => {
   // File and directory paths.
   const filePath = event.data.name; // 'illustration/Sarah.jpg'
@@ -174,7 +185,7 @@ exports.recordUrl = functions.storage.object().onChange(event => {
     .catch(error => console.error('image2', error));
 
 });
-
+*/
 exports.getUrls = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const params = req.url.split('/');
