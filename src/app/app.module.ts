@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { ServiceWorkerModule } from '@angular/service-worker';
+//import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -41,7 +41,7 @@ const ROUTES: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    ServiceWorkerModule,
+    //ServiceWorkerModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [ImageService],

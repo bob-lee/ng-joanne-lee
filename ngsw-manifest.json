@@ -1,4 +1,4 @@
-{
+/*{
   "routing": {
     "index": "/index.html",
     "routes": {
@@ -38,4 +38,4 @@
       }
     ]
   }
-}
+}*/
