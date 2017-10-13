@@ -1,4 +1,5 @@
 importScripts('/workbox-sw.js');
+//self.workbox.logLevel = self.workbox.LOG_LEVEL.verbose;
 
 const workboxSW = new self.WorkboxSW();
 

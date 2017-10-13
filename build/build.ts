@@ -10,20 +10,10 @@ async function copyWorkbox() {
   const cwd = process.cwd();
   const pkgPath = `${cwd}/node_modules/workbox-sw/package.json`;
   const pkg = require(pkgPath);
-
-  // const main = pkg.main.replace(/prod/, 'dev'); // dev for debug
-  // const readPathMap = `${cwd}/node_modules/workbox-sw/${main}.map`;
-  // const dataMap = fs.readFileSync(readPathMap, 'utf8');
-  // const pathMap = `${cwd}/dist/workbox-sw.dev.v2.1.0.js.map`;
-  // const readPath = `${cwd}/node_modules/workbox-sw/${main}`;
-  
   const readPath = `${cwd}/node_modules/workbox-sw/${pkg.main}`;
   const data = fs.readFileSync(readPath, 'utf8');
   const path = `${cwd}/dist/workbox-sw.js`;
-  return [
-    { data, path },
-    //{ data:dataMap, path:pathMap }
-  ];
+  return [{ data, path }];
 }
 
 /**

@@ -37,7 +37,7 @@ const ROUTES: Routes = [
     ContactComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'ng-joanne-lee' }),
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
