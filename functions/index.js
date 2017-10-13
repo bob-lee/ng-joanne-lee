@@ -29,7 +29,7 @@ exports.trigger = angularUniversal.trigger({
 const functions = require('firebase-functions');
 const mkdirp = require('mkdirp-promise');
 // Include a Service Account Key to use a Signed URL
-//const gcs = require('@google-cloud/storage')({ keyFilename: 'service-account-credentials.json' });
+const gcs = require('@google-cloud/storage')({ keyFilename: 'service-account-credentials.json' });
 const admin = require('firebase-admin');
 const cors = require('cors')({origin: true});
 admin.initializeApp(functions.config().firebase);
@@ -45,7 +45,7 @@ const CONVERT_PREFIX = 'of_'; // image2 file would have this prefix, e.g. 'of_Sa
 const THUMB_PREFIX = 'thumb_'; // converted thumb file of image2 would have this prefix, e.g. 'thumb_of_Sarah.jpg.jpg'
 const WEBP_EXT = 'webp';
 const WEBP_QUALITY = 80;
-/*
+
 exports.recordUrl = functions.storage.object().onChange(event => {
   // File and directory paths.
   const filePath = event.data.name; // 'illustration/Sarah.jpg'
@@ -185,7 +185,7 @@ exports.recordUrl = functions.storage.object().onChange(event => {
     .catch(error => console.error('image2', error));
 
 });
-*/
+
 exports.getUrls = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const params = req.url.split('/');

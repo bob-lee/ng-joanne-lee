@@ -1,6 +1,5 @@
-import { enableProdMode, PLATFORM_ID, Inject } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { isPlatformBrowser } from '@angular/common';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
@@ -10,9 +9,7 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .then(_ => {
-    if (isPlatformBrowser(PLATFORM_ID)) registerServiceWorker('sw-default');
-  });
+  .then(_ => registerServiceWorker('sw-default'));
 
 function registerServiceWorker(swName: string) {
   if ('serviceWorker' in navigator) {
