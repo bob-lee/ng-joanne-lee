@@ -1,5 +1,6 @@
 import { WorkboxBuild, Manifest } from './workbox.types';
 import * as fs from 'fs-extra';
+import * as uglify from 'uglify-js';
 
 const workbox: WorkboxBuild = require('workbox-build');
 
@@ -17,6 +18,17 @@ async function copyWorkbox() {
 }
 
 /**
+ * Minify dropdown.js
+ */
+async function minifiedDropdownJs() {
+  const code = fs.readFileSync(process.cwd() + '/src/dropdown.js', 'utf8');
+  const data = uglify.minify(code).code;
+  const path = process.cwd() + '/dist/dropdown.js';
+  return [{ data,  path }];
+}
+
+
+/**
  * Build Steps
  *  (assume tsc has ran)
  *  - Copy assets from npm
@@ -25,7 +37,9 @@ async function copyWorkbox() {
  */
 async function build() {
   const wb = await copyWorkbox();
-  await wb.map(file => {
+  const dropdown = await minifiedDropdownJs();
+  const all = wb.concat(dropdown);
+  await all.map(file => {
     console.log(`Writing ${file.path}.`);
     return fs.writeFileSync(file.path, file.data, 'utf8');
   });
