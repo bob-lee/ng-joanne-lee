@@ -18,49 +18,12 @@
   
   <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Quicksand">
   <script src="https://use.fontawesome.com/098be2bce8.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded",function(){function e(e){return function(n){e.id!==n.target.id&&(e.checked=!1,t())}}function t(){document.removeEventListener("click",n),document.removeEventListener("touchstart",n)}var n;setTimeout(function(){var c=document.querySelector('.ddm input[type="checkbox"][id]');c&&c.addEventListener("change",function(c){c.target.checked?(n=e(c.target),document.addEventListener("click",n),document.addEventListener("touchstart",n)):t()})},0)});
-    /*
-      document.addEventListener('DOMContentLoaded', function() {
-        var handler; // to hold a reference to event handler of currently-opened menu
-
-        setTimeout(function() {
-          var input = document.querySelector('.ddm input[type="checkbox"][id]');
-
-          if (input) {
-            input.addEventListener('change', function(e) {
-              if (e.target.checked) {
-                handler = outside(e.target); // keep a reference to remove later
-                document.addEventListener('click', handler);
-                document.addEventListener('touchstart', handler); // for touch device
-              } else {
-                removeHandler();
-              }
-            });
-          }
-        }, 0);
-
-        function outside(el) {
-          return function curried(e) { // el is currently-opened menu
-            if (el.id !== e.target.id) {
-              el.checked = false;
-
-              removeHandler();
-            }
-          }
-        }
-
-        function removeHandler() {
-          document.removeEventListener('click', handler);
-          document.removeEventListener('touchstart', handler);
-        }
-      });
-    */
-  </script>
 </head>
 
 <body>
   <app-root>Loading...</app-root>
+
+  <script defer=defer src=/dropdown.js></script>
 </body>
 
 </html>

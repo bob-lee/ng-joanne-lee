@@ -29,7 +29,10 @@ exports.trigger = angularUniversal.trigger({
 const functions = require('firebase-functions');
 const mkdirp = require('mkdirp-promise');
 // Include a Service Account Key to use a Signed URL
-const gcs = require('@google-cloud/storage')({ keyFilename: 'service-account-credentials.json' });
+const gcs = require('@google-cloud/storage')({ 
+  keyFilename: 'service-account-credentials.json',
+  projectId: 'joanne-lee'
+});
 const admin = require('firebase-admin');
 const cors = require('cors')({origin: true});
 admin.initializeApp(functions.config().firebase);
