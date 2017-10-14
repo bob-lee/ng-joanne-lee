@@ -4,7 +4,7 @@
   "name": "Joanne Lee",
   "scope": "/",
   "display": "standalone",
-  "start_url": "./?utm_source=web_app_manifest",
+  "start_url": "/",
   "short_name": "Joanne",
   "theme_color": "#ffffff",
   "description": "Joanne Lee's website showing her work images",

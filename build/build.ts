@@ -46,8 +46,7 @@ async function build() {
 
   return workbox.injectManifest({
     globDirectory: './dist/',
-    globPatterns: ['**\/*.{html,js,css,png,jpg,svg}'],
-    globIgnores: ['build/*'],
+    globPatterns: ['**\/*.{html,js,css,png,jpg,json}'],
     swSrc: './src/sw-template.js',
     swDest: './dist/sw-default.js',
   });

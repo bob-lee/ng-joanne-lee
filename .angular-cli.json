@@ -22,7 +22,6 @@
         "styles.css"
       ],
       "scripts": [
-        "modernizr-custom.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -49,7 +48,6 @@
         "styles.css"
       ],
       "scripts": [
-        "modernizr-custom.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
