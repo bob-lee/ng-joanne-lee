@@ -7,7 +7,7 @@
   "start_url": "./?utm_source=web_app_manifest",
   "short_name": "Joanne",
   "theme_color": "#ffffff",
-  "description": "",
+  "description": "Joanne Lee's website showing her work images",
   "orientation": "any",
   "background_color": "#ffffff",
   "related_applications": [],
@@ -19,13 +19,8 @@
       "type": "image/png"
     },
     {
-        "src": "/assets/icons/android-chrome-384x384.png",
-        "sizes": "384x384",
-        "type": "image/png"
-    },
-    {
-      "src": "/assets/icons/apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "/assets/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
