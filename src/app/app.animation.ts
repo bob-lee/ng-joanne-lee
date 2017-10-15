@@ -1,7 +1,7 @@
 import { animate, animateChild, animation, group, query, stagger, state, style, transition, trigger, useAnimation } from '@angular/animations';
 
 export const routerTransition = trigger('routerTransition', [
-  transition('* => *', [
+  transition('home <=> profile, home <=> work, home <=> contact, profile <=> work, profile <=> contact, work <=> contact', [
     query(':enter, :leave', style({ position: 'fixed', width:'100%',height:'100%' }), {optional:true}),
     query(':enter', style({ transform: 'translateX(100%)' }), {optional:true}),
     
