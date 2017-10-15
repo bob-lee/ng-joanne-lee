@@ -8,6 +8,9 @@ self.addEventListener('activate', event => event.waitUntil(self.clients.claim())
 
 workboxSW.precache([]);
 
+// app-shell
+workboxSW.router.registerNavigationRoute('/index.html');
+
 // webfont-cache
 const webFontHandler = workboxSW.strategies.cacheFirst({
   cacheName: 'webfont-cache',
