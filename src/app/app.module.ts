@@ -15,8 +15,7 @@ import { SubmenuComponent } from './work/submenu/submenu.component';
 
 import { ImageService } from './work/image.service';
 
-import { ContactComponent } from './contact/contact/contact.component';
-//import 'hammerjs/hammer';
+import { ContactComponent } from './contact/contact.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -37,7 +36,7 @@ const ROUTES: Routes = [
     ContactComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-joanne-lee' }),
+    BrowserModule/*.withServerTransition({ appId: 'ng-joanne-lee' })*/,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,

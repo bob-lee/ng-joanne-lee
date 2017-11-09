@@ -1,5 +1,5 @@
+/*
 'use strict';
-
 const angularUniversal = require('angular-universal-express-firebase');
 exports.trigger = angularUniversal.trigger({
   index: __dirname + '/dist/index.html',
@@ -10,7 +10,7 @@ exports.trigger = angularUniversal.trigger({
   browserCacheExpiry: 300, // cache in the browser for 5 minutes
   staleWhileRevalidate: 120 // serve a stale version for 2 minutes after cdnCacheExpiry, but refresh CDN in background
 });
-
+*/
 /* image file naming / uploading convention
 
   0. assume the page want to show images in pair - image1 as parent and image2 as child (optional)
