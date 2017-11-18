@@ -16,7 +16,7 @@ export class ImageComponent implements OnInit {
   // height: number;
   // element: any;
 
-  constructor(/*private animBuilder: AnimationBuilder*/) { }
+  constructor(public el: ElementRef/*private animBuilder: AnimationBuilder*/) { }
 
   ngOnInit() {
     /*
@@ -31,7 +31,8 @@ export class ImageComponent implements OnInit {
 
   loaded(image) {
     this.imageLoaded = true;
-    this.load.emit(image.fileName);
+    image.element = this.el.nativeElement;
+    this.load.emit(image);
   }
   /*
   toggle() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { routerTransition, pageAnimation } from '../app.animation';
@@ -10,24 +10,23 @@ import { ImageService } from './image.service';
   </div>
 [ngClass]="{'show': imagesLoaded}"
     <pre>{{imagesLoaded}} {{count}} {{loadedImages}}</pre>
+    <submenu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></submenu>
 
 */
 @Component({
   template: `
-    <submenu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></submenu>
     <div class="images">
-      <my-image [image]="i" *ngFor="let i of imageService.show" (load)="loaded($event)"></my-image>
+      <my-image [image]="i" *ngFor="let i of imageService.list" (load)="loaded($event)"></my-image>
     </div>
-    <submenu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></submenu>
   `,
   styleUrls: ['./work.component.css'],
   animations: [routerTransition, pageAnimation],
   //host: {'[@pageAnimation]': ''}
 })
-export class WorkComponent implements OnInit {
+export class WorkComponent implements OnInit, OnDestroy {
   loadedImages: number = 0;
 
-  get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
+  //get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -46,15 +45,21 @@ export class WorkComponent implements OnInit {
     });
   }
 
-  loaded($event) {
+  ngOnDestroy() {
+    this.imageService.unobserve();
+  }
+
+  loaded(image) {
     this.loadedImages++;
+    this.imageService.observe(image);
+    console.log(`loaded [${image.index}], ${image.fileName}, ${this.loadedImages}`);
     //console.log('loaded', $event, this.loadedImages, this.imageService.show.length);
   }
 
-  page(next: boolean = true) {
-    const page = this.imageService.page + (next ? 1 : -1);
-    this.getUrls('', page);
-  }
+  // page(next: boolean = true) {
+  //   const page = this.imageService.page + (next ? 1 : -1);
+  //   this.getUrls('', page);
+  // }
 
   private getUrls(path, page = 1) {
     this.loadedImages = 0;
