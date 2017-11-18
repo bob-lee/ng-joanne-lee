@@ -2,13 +2,13 @@
   <div class="image-pair">
     <picture>
       <source type="image/webp" *ngIf="image.webpUrl" [srcset]="image.webpUrl">
-      <img [src]="image.url" alt="" class="image1" (load)="loaded(image)">
+      <img [src]="(image.toLoad && image.url) || ''" alt="" class="image1" (load)="loaded(image)">
     </picture>
 
   </div>
   <div class="expand">
     <span>{{image.text}}</span>
-    <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl || ''">
+    <img [hidden]="!image.thumbUrl || !image.thumbUrl" class="image2" [src]="(image.toLoad && image.thumbUrl) || ''">
   </div>
 </div>
 <!-- GET http://localhost:4200/null 404 (Not Found)

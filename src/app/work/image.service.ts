@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 // import { environment } from '../../environments/environment';
 
 const PAGE_SIZE = 5; // 5 items in a page
+const INTERSECT_PAGESIZE = 2;
 const API = 'https://us-central1-joanne-lee.cloudfunctions.net/getUrls';
 /*
 export enum OrderBy {
@@ -25,14 +26,95 @@ export class ImageService {
   get hasPrev() { return this.list.length > 0 && this.page > 1; }
   get hasMore() { return this.list.length > 0 && this.page < this.pages; }
 
+  /*
+    try lazy-loading offscreen images using IntersectionObserver API:
+
+    1. Rather than trying to write a generic demo, focus on what's needed here (work.component).
+    2. Keep observing only one element all the time.
+    3. This service decides which element to observe by index.
+    4. The component tells which element to observe.
+    5. The service provides urls accordingly.
+
+  */
+  intersectionObserver: IntersectionObserver;
+  intersectionRatio: number;
+  elementToObserve: Element;
+  private _indexToObserve: number; // only to grow from 0 as scrolling down
+  get indexToObserve() { return this._indexToObserve; }
+  set indexToObserve(value) {
+    const len = this.list.length;
+    if (!value || value <= this._indexToObserve || value >= len) {
+      console.error(`indexToObserve(${value})`);
+      return;
+    }
+
+    this._indexToObserve = value;
+
+    // update 'toLoad' to load more images
+    for (let i = 0; i < INTERSECT_PAGESIZE; i++) {
+      const index = this._indexToObserve + i;
+      if (index === len) return;
+      this.list[index].toLoad = true;
+    }
+  }
+
   constructor(private http: Http) {
-    console.info(`'image.service'`); // watch when / how often the service is instantiated
+    try {
+      this.intersectionObserver = new IntersectionObserver(entries => {
+        const entry = entries[0];
+        const currentRatio = this.intersectionRatio;
+        const newRatio = entry.intersectionRatio;
+        const boundingClientRect = entry.boundingClientRect;
+        const scrollingDown = currentRatio !== undefined && newRatio < currentRatio && boundingClientRect.bottom < boundingClientRect.height;
+
+        this.intersectionRatio = newRatio;
+        
+        if (scrollingDown) {
+          const i = this.indexToObserve + INTERSECT_PAGESIZE;
+          this.unobserve();
+          this.indexToObserve = i;
+          console.info(`${currentRatio} -> ${newRatio} [${i}]`);
+        }
+
+        //console.log(entry);
+        //console.log(entry.intersectionRatio);
+      }, { threshold: [ 0, 0.25, 0.5, 0.75, 1 ]});
+    } catch(e) {
+      console.error(`failed to create IntersectionObserver:`, e);
+    }
+
+    console.info(`'image.service' ${!!this.intersectionObserver}`); // watch when / how often the service is instantiated
     // this.app = firebase.initializeApp(environment.firebase);
     // this.db = firebase.database();
   }
 
+  observe(me: any) { // observe new element, me
+    if (!me || !me.element || me.index === undefined) {
+      console.warn(`observe() invalid input: ${me}`);
+      return;
+    }
+
+    if (me.index === this.indexToObserve) {
+      this.elementToObserve = me.element;
+      this.intersectionObserver.observe(me.element);
+      console.info(`elementToObserve = ${me.index}`);
+    } else {
+      console.log(`observe(${me.index} !== ${this.indexToObserve})`);
+    }
+  }
+
+  unobserve() { // unobserve current element
+    if (this.elementToObserve) {
+      this.intersectionObserver.unobserve(this.elementToObserve);
+      this.intersectionRatio = undefined;
+      console.info(`unobserve [${this.indexToObserve}]`);
+    } else {
+      console.log(`null elementToObserve`);
+    }
+  }
+
   getUrls(path: string, page: number = 1): /*firebase.*/Promise<any> {
-    return this.getFullList2(path || this.group).then(() => {
+    return this.getFullList2(path || this.group)/*.then(() => {
       if (page > this.pages) page = 1;
       const begin = (page - 1) * PAGE_SIZE;
       this.show = this.list.slice(begin, begin + PAGE_SIZE);
@@ -40,7 +122,7 @@ export class ImageService {
 
       console.log(`getUrls(${page}/${this.pages}, ${this.show.length})`);
       //this.getFullList2(path || this.group);
-    });
+    });*/
   }
   /*
   private getFullList(path: string): firebase.Promise<any[]> {
@@ -72,8 +154,18 @@ export class ImageService {
     return this.http.get(`${API}/${path}`).toPromise().then((snapshot) => {
       this.list = [];
 
+      // prepare a list for intersection observer
+      this._indexToObserve = 0;
       const items = snapshot.json();
-      this.list = items.reverse();
+      this.list = items.reverse().map((item, index) => {
+        /* provide 2 additional properties for each image:
+              toLoad: boolean, the component to load image,
+              index: number, the component to call observe(item) on image loaded
+         */
+        item.toLoad = index < (this.indexToObserve + INTERSECT_PAGESIZE);
+        item.index = index; 
+        return item; 
+      });
       this.group = path;
       this.pages = Math.ceil(this.list.length / PAGE_SIZE);
 
