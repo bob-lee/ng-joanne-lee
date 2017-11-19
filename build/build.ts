@@ -1,6 +1,7 @@
 import { WorkboxBuild, Manifest } from './workbox.types';
 import * as fs from 'fs-extra';
 import * as uglify from 'uglify-js';
+import * as pathmodule from 'path';
 
 const workbox: WorkboxBuild = require('workbox-build');
 
@@ -14,7 +15,13 @@ async function copyWorkbox() {
   const readPath = `${cwd}/node_modules/workbox-sw/${pkg.main}`;
   const data = fs.readFileSync(readPath, 'utf8');
   const path = `${cwd}/dist/workbox-sw.js`;
-  return [{ data, path }];
+  return [
+    { data, path },
+    {
+      data: fs.readFileSync(`${readPath}.map`, 'utf8'),
+      path: `${cwd}/dist/${pathmodule.basename(pkg.main)}.map`
+    }
+  ]
 }
 
 /**
@@ -37,9 +44,9 @@ async function minifiedDropdownJs() {
  */
 async function build() {
   const wb = await copyWorkbox();
-  const dropdown = await minifiedDropdownJs();
-  const all = wb.concat(dropdown);
-  await all.map(file => {
+  // const dropdown = await minifiedDropdownJs();
+  // const all = wb.concat(dropdown);
+  await wb.map(file => {
     console.log(`Writing ${file.path}.`);
     return fs.writeFileSync(file.path, file.data, 'utf8');
   });
@@ -47,7 +54,8 @@ async function build() {
   return workbox.injectManifest({
     globDirectory: './dist/',
     globPatterns: ['**\/*.{html,js,css,png,jpg,json}'],
-    globIgnores: ['build/*', 'sw-default.js', 'workbox-sw.js','assets/icons/**/*', 'index.html'],
+    globIgnores: ['build/*', 'sw-default.js', 'workbox-sw.js', 'index.html'],
+    // globIgnores: ['build/*', 'sw-default.js', 'workbox-sw.js', 'assets/icons/**/*', 'index.html'],
     swSrc: './src/sw-template.js',
     swDest: './dist/sw-default.js',
   });

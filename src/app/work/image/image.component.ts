@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { animate, AnimationBuilder, style } from '@angular/animations';
 
 @Component({
-  selector: 'my-image',
+  selector: 'app-image',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css'],
 })

@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { ImageService } from '../image.service';
 
 @Component({
-  selector: 'submenu',
+  selector: 'sub-menu',
   template: `
     <div class="submenu" *ngIf="imagesLoaded && imageService.pages > 1">
       <a [ngClass]="{'hide': !imageService.hasPrev}" (click)="page(false)">< prev</a>
@@ -21,7 +21,7 @@ export class SubmenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  page(next: boolean = true) { 
+  page(next: boolean = true) {
     this.nextOrPrev.emit(next);
   }
 

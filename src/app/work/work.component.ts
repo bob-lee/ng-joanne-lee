@@ -10,23 +10,23 @@ import { ImageService } from './image.service';
   </div>
 [ngClass]="{'show': imagesLoaded}"
     <pre>{{imagesLoaded}} {{count}} {{loadedImages}}</pre>
-    <submenu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></submenu>
+    <sub-menu [imagesLoaded]="imagesLoaded" (nextOrPrev)="page($event)"></sub-menu>
 
 */
 @Component({
   template: `
     <div class="images">
-      <my-image [image]="i" *ngFor="let i of imageService.list" (load)="loaded($event)"></my-image>
+      <app-image [image]="i" *ngFor="let i of imageService.list" (load)="loaded($event)"></app-image>
     </div>
   `,
   styleUrls: ['./work.component.css'],
   animations: [routerTransition, pageAnimation],
-  //host: {'[@pageAnimation]': ''}
+  // host: {'[@pageAnimation]': ''}
 })
 export class WorkComponent implements OnInit, OnDestroy {
   loadedImages: number = 0;
 
-  //get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
+  // get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -52,8 +52,7 @@ export class WorkComponent implements OnInit, OnDestroy {
   loaded(image) {
     this.loadedImages++;
     this.imageService.observe(image);
-    console.log(`loaded [${image.index}], ${image.fileName}, ${this.loadedImages}`);
-    //console.log('loaded', $event, this.loadedImages, this.imageService.show.length);
+    // console.log(`loaded [${image.index}], ${image.fileName}, ${this.loadedImages}`);
   }
 
   // page(next: boolean = true) {

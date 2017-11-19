@@ -19,7 +19,7 @@ function registerServiceWorker(swName: string) {
       .then(reg => {
         console.log('[App] Successful service worker registration', reg);
         reg.onupdatefound = () => {
-          var installingWorker = reg.installing;
+          const installingWorker = reg.installing;
           installingWorker.onstatechange = () => {
             if (installingWorker.state === 'installed') {
               if (navigator.serviceWorker.controller) {
@@ -28,8 +28,8 @@ function registerServiceWorker(swName: string) {
                 console.log('[App] offline ready!');
               }
             }
-          }
-        }
+          };
+        };
       })
       .catch(err =>
         console.error('[App] Service worker registration failed', err)

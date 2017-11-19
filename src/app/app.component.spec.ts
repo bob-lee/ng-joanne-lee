@@ -6,15 +6,11 @@ import { APP_BASE_HREF } from '@angular/common';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AppModule, routes } from './app.module';
+import { AppModule, ROUTES } from './app.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WorkComponent } from './work/work.component';
-import { CraftComponent } from './work/craft.component';
-import { IllustrationComponent } from './work/illustration.component';
-import { PaintingComponent } from './work/painting.component';
-import { GalleryParentComponent } from './gallery/gallery-parent.component';
 
 describe('AppComponent (routes)', () => {
   const title = 'Joanne Lee';
@@ -22,7 +18,7 @@ describe('AppComponent (routes)', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule.withRoutes(routes),
+        RouterTestingModule.withRoutes(ROUTES),
         AppModule
       ],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
@@ -30,27 +26,27 @@ describe('AppComponent (routes)', () => {
   });
 
   it('should create the app', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
 
   it(`should have title as 'Joanne Lee'`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual(title);
   }));
 
   it('should render title in header', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
+    const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('header div.header-title span a').textContent).toContain(title);
   }));
 
   // routes
   it(`can navigate to 'home' (async)`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
       .navigate(['/home'])
       .then(() => {
@@ -59,8 +55,8 @@ describe('AppComponent (routes)', () => {
   }));
 
   it(`can navigate to 'work/craft' and change titleWork properly`, fakeAsync(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
     TestBed.get(Router)
       .navigate(['/work/craft'])
       .then(() => {
@@ -72,8 +68,8 @@ describe('AppComponent (routes)', () => {
   }));
 
   it(`can navigate to 'work/illustration' and change titleWork properly`, fakeAsync(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
     TestBed.get(Router)
       .navigate(['/work/illustration'])
       .then(() => {
@@ -85,8 +81,8 @@ describe('AppComponent (routes)', () => {
   }));
 
   it(`can navigate to 'work/painting' and change titleWork properly`, fakeAsync(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
     TestBed.get(Router)
       .navigate(['/work/painting'])
       .then(() => {
@@ -96,7 +92,7 @@ describe('AppComponent (routes)', () => {
     tick();
     expect(app.titleWork).toBe('painting');
   }));
-
+/*
   it(`can navigate to 'gallery' (async)`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
@@ -105,14 +101,14 @@ describe('AppComponent (routes)', () => {
         expect(location.pathname.endsWith('/gallery')).toBe(true);
       }).catch(e => console.log(e));
   }));
-
+*/
   it(`should redirect to default route 'home' (async)`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let router = TestBed.get(Router);
+    const fixture = TestBed.createComponent(AppComponent);
+    const router = TestBed.get(Router);
     router.initialNavigation(); // triggers default
 
     fixture.whenStable().then(() => {
-      let path = location.pathname;
+      const path = location.pathname;
       console.log(path);
       expect(location.pathname.endsWith('/home')).toBe(true);
     });

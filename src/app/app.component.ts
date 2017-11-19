@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-//import { NgServiceWorker } from '@angular/service-worker';
+// import { NgServiceWorker } from '@angular/service-worker';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import { routerTransition } from './app.animation';
@@ -14,13 +14,11 @@ import { routerTransition } from './app.animation';
 export class AppComponent implements OnInit {
   title = 'Joanne Lee';
   titleWork = 'work';
-  //showIt: boolean = false; // hide it
+  // showIt: boolean = false; // hide it
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
-    /*public sw: NgServiceWorker*/) { 
-
-    }
+    /*public sw: NgServiceWorker*/) { }
 
   ngOnInit() {
     // gentle app update flow

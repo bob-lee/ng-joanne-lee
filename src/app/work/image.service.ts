@@ -53,7 +53,7 @@ export class ImageService {
     // update 'toLoad' to load more images
     for (let i = 0; i < INTERSECT_PAGESIZE; i++) {
       const index = this._indexToObserve + i;
-      if (index === len) return;
+      if (index === len) { return };
       this.list[index].toLoad = true;
     }
   }
@@ -65,10 +65,11 @@ export class ImageService {
         const currentRatio = this.intersectionRatio;
         const newRatio = entry.intersectionRatio;
         const boundingClientRect = entry.boundingClientRect;
-        const scrollingDown = currentRatio !== undefined && newRatio < currentRatio && boundingClientRect.bottom < boundingClientRect.height;
+        const scrollingDown = currentRatio !== undefined && newRatio < currentRatio &&
+          boundingClientRect.bottom < boundingClientRect.height;
 
         this.intersectionRatio = newRatio;
-        
+
         if (scrollingDown) {
           const i = this.indexToObserve + INTERSECT_PAGESIZE;
           this.unobserve();
@@ -76,10 +77,10 @@ export class ImageService {
           console.info(`${currentRatio} -> ${newRatio} [${i}]`);
         }
 
-        //console.log(entry);
-        //console.log(entry.intersectionRatio);
+        // console.log(entry);
+        // console.log(entry.intersectionRatio);
       }, { threshold: [ 0, 0.25, 0.5, 0.75, 1 ]});
-    } catch(e) {
+    } catch (e) {
       console.error(`failed to create IntersectionObserver:`, e);
     }
 
@@ -148,8 +149,9 @@ export class ImageService {
   }
   */
   private getFullList2(path: string): Promise<any> {
-    if (path === this.group && this.list.length > 0)
+    if (path === this.group && this.list.length > 0) {
       return Promise.resolve(this.list);
+    }
 
     return this.http.get(`${API}/${path}`).toPromise().then((snapshot) => {
       this.list = [];
@@ -163,8 +165,8 @@ export class ImageService {
               index: number, the component to call observe(item) on image loaded
          */
         item.toLoad = index < (this.indexToObserve + INTERSECT_PAGESIZE);
-        item.index = index; 
-        return item; 
+        item.index = index;
+        return item;
       });
       this.group = path;
       this.pages = Math.ceil(this.list.length / PAGE_SIZE);
@@ -192,7 +194,7 @@ export class ImageService {
   }
 
   // Server side pagination tried below
-  
+
   headKey: string;
   tailKey: string;
   get prev() { return this.page < 2 ? '' : '< prev'; }

@@ -23,6 +23,7 @@
         "styles.css"
       ],
       "scripts": [
+        "dropdown.js",
         "intersection-observer.js"
       ],
       "environmentSource": "environments/environment.ts",
@@ -50,6 +51,7 @@
         "styles.css"
       ],
       "scripts": [
+        "dropdown.js",
         "intersection-observer.js"
       ],
       "environmentSource": "environments/environment.ts",

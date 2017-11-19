@@ -11,7 +11,7 @@ export class ContactComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (!window.matchMedia("(pointer:coarse)").matches) {
+    if (!window.matchMedia('(pointer:coarse)').matches) {
       this.elRef.nativeElement.removeAttribute('href');
     }
   }

@@ -15,7 +15,7 @@ import { ImageService } from './image.service';
 export const ROUTES: Routes = [
   {
     path: '',
-    component: WorkComponent, 
+    component: WorkComponent,
     children: [
       { path: 'craft', component: CraftComponent, data: { state: 'craft'} },
       { path: 'illustration', component: IllustrationComponent, data: { state: 'illustration'} },
