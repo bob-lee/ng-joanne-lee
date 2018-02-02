@@ -24,7 +24,7 @@ import { ImageService } from './image.service';
   // host: {'[@pageAnimation]': ''}
 })
 export class WorkComponent implements OnInit, OnDestroy {
-  loadedImages: number = 0;
+  loadedImages: number;
 
   // get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
 
@@ -36,11 +36,15 @@ export class WorkComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.info(`'WorkComponent'`);
 
-    this.route.params.subscribe(params => {
-      const group = params['name'];
-      if (group !== this.imageService.group) {
-        console.log(`Work group(${this.imageService.group} => ${group})`);
-        this.getUrls(group);
+    this.route.paramMap.subscribe(p => {
+      //console.info('WorkComponent', p);
+
+      if (p.has('name')) {
+        const group = p.get('name');
+        if (group !== this.imageService.group) {
+          console.log(`Work group(${this.imageService.group} => ${group})`);
+          this.getUrls(group);
+        }
       }
     });
   }

@@ -1,20 +1,18 @@
 <div class="image" [ngClass]="{'show': imageLoaded}">
-  <div class="image-pair">
-    <picture>
-      <source type="image/webp" *ngIf="image.webpUrl" [srcset]="image.webpUrl">
-      <img [src]="(image.toLoad && image.url) || ''" 
-        (load)="loaded(image)"
-        class="image1" alt="{{image.fileName}}">
-    </picture>
+  <picture>
+    <img [src]="(image.toLoad && image.url) || ''" 
+    (load)="loaded(image)"
+    class="image1" alt="{{image.fileName}}">
+  </picture>
 
-  </div>
   <div class="expand">
     <span>{{image.text}}</span>
     <img [hidden]="!image.thumbUrl || !image.thumbUrl"
-      [src]="(image.toLoad && image.thumbUrl) || ''" 
-      class="image2" alt="thumb">
+    [src]="(image.toLoad && image.thumbUrl) || ''" 
+    class="image2" alt="thumb">
   </div>
 </div>
 <!-- GET http://localhost:4200/null 404 (Not Found)
-    <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl">
+  <img [hidden]="!image.thumbUrl" class="image2" [src]="image.thumbUrl">
+  <source type="image/webp" *ngIf="image.webpUrl" [srcset]="image.webpUrl">
 -->

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmenuComponent } from './submenu.component';
+import { ImageService } from '../image.service';
 
 describe('SubmenuComponent', () => {
   let component: SubmenuComponent;
@@ -8,7 +9,10 @@ describe('SubmenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubmenuComponent ]
+      declarations: [ SubmenuComponent ],
+      providers: [
+        { provide: ImageService, useValue: {} }
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +23,7 @@ describe('SubmenuComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
