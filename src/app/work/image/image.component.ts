@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { animate, AnimationBuilder, style } from '@angular/animations';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-image',
