@@ -5,17 +5,8 @@
 		<span><a routerLink="/home">{{title}}</a></span>
 	</div>
 	<nav class="header-menu">
-		<a class="header-menu-item" routerLink="/profile" routerLinkActive="active">profile</a>
-		<div class="ddm" routerLinkActive="active">
-			<input type="checkbox" id="ddm-1" >
-			<label for="ddm-1" class="header-menu-item">{{titleWork}}</label>
-			<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
-			<div class="dd">
-				<a routerLink="/work/portrait" routerLinkActive="active">portrait</a>
-				<a routerLink="/work/painting" routerLinkActive="active">painting</a>
-				<a routerLink="/work/illustration" routerLinkActive="active">illustration</a>
-			</div>
-		</div>
+    <a class="header-menu-item" routerLink="/profile" routerLinkActive="active">profile</a>
+    <dropdown [titleWork]="titleWork"></dropdown>
 		<a class="header-menu-item" routerLink="/contact" routerLinkActive="active">contact</a>
 	</nav>
 </header>
@@ -27,3 +18,15 @@
 <footer>
 	Copyright © 2017 Joanne Lee
 </footer>
+<!-- 
+		<div class="ddm" routerLinkActive="active">
+			<input type="checkbox" id="ddm-1" >
+			<label for="ddm-1" class="header-menu-item">{{titleWork}}</label>
+			<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+			<div class="dd">
+				<a routerLink="/work/portrait" routerLinkActive="active">portrait</a>
+				<a routerLink="/work/painting" routerLinkActive="active">painting</a>
+				<a routerLink="/work/illustration" routerLinkActive="active">illustration</a>
+			</div>
+		</div>
+-->

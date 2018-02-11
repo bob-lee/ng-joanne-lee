@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ImageComponent } from './image.component';
 import { listPortrait } from '../image.service.spec';
 
@@ -12,15 +12,16 @@ describe('ImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageComponent ],
+      declarations: [ImageComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ImageComponent);
     component = fixture.componentInstance;
-    
+
     component.image = expectedImage;
     fixture.detectChanges();
   });
@@ -38,7 +39,7 @@ describe('ImageComponent', () => {
     expect(image2.getAttribute('class')).toBe('image2');
     expect(image2.getAttribute('src')).toBe(expectedImage.thumbUrl);
     expect(span.textContent).toBe(expectedImage.text);
-    
+
     // console.info('native', image2Span.textContent);
   });
 });

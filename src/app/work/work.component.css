@@ -1,3 +1,6 @@
+:host body {
+  scroll-behavior: smooth;
+}
 .images {
   display: flex;
   flex-direction: column;
@@ -5,4 +8,39 @@
   align-items: center;
   text-align: center;
   padding: 0.4em;
+  scroll-behavior: smooth;
+  /* transition: transform 0.6s ease-in-out; */
+}
+.back-to-top {
+  position: fixed;
+  bottom: 1.5em;
+  left: 1em;
+  transform: rotate(-90deg);
+  opacity: 0.3;
+  visibility: hidden;
+}
+.back-to-top:hover {
+  cursor: pointer;
+}
+.back-to-top.show {
+  visibility: visible;
+}
+
+.info {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+  /* opacity: 0.3; */
+}
+
+a[id="images"]:target ~ div#images {
+  -webkit-transform: translateY( 0px);
+  transform: translateY( 0px );
+}
+
+div#imagelink {
+  position: fixed;
+  bottom: 15em;
+  right: 15em;
+  opacity: 0.3;
 }

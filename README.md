@@ -23,3 +23,16 @@ The website was built and deployed using following technologies:
 [Visit the web!](https://joanne-lee.firebaseapp.com/home)
 
 For development, run `npm run build:ssr` to build and run `npm run serve` to test it on `localhost:5000` or run `firebase deploy` to deploy the web.
+
+```
+// to install dependencies
+npm i
+// to debug on localhost:4200
+ng serve
+// to run tests
+ng test
+// to build for production
+npm run build:ssr
+// to test on localhost:5000 with production build
+npm run serve
+```

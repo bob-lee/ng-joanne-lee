@@ -7,11 +7,13 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
+import { DropdownComponent } from './dropdown.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WorkComponent } from './work/work.component';
 import { ImageComponent } from './work/image/image.component';
 import { LoaderComponent } from './work/loader/loader.component';
+import { SubmenuComponent } from './work/submenu/submenu.component';
 
 import { ImageService } from './work/image.service';
 
@@ -28,11 +30,13 @@ export const ROUTES: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    DropdownComponent,
     HomeComponent,
     ProfileComponent,
     WorkComponent,
     ImageComponent,
     LoaderComponent,
+    SubmenuComponent,
     ContactComponent
   ],
   imports: [
