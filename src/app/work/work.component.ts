@@ -15,18 +15,30 @@ import { ImageService } from './image.service';
     <a id="images"></a>
     <div class="info">{{info}}</div>
     get info() { return 'scrollY=' + Math.ceil(window.pageYOffset); }
-
+    
     <div id="imagelink"><a [routerLink]="['.']" fragment="image0">Images</a></div>
+    pageScroll href="#images"
+    (click)="scrollToTop()" 
+    <a pageScroll href="#images">Take me to the awesomeness</a>
+
+    <div class="back-to-top two" 
+      (click)="scrollToTopSmooth()"
+      [ngClass]="{'show': showIcon}">
+      <i class="fa fa-step-forward fa-lg" aria-hidden="true"></i>
+    </div>
 */
 @Component({
   template: `
-    <div class="images" id="images">
+    <div class="images">
       <app-image id="{{'image'+idx}}" [image]="i" *ngFor="let i of imageService.list; let idx=index" (load)="loaded($event)"></app-image>
     </div>
     <div class="back-to-top" 
-      (click)="scrollToTop()" 
+      appScroll
       [ngClass]="{'show': showIcon}">
       <i class="fa fa-step-forward fa-lg" aria-hidden="true"></i>
+    </div>
+    <div class="back-to-top test">
+      {{info}}
     </div>
   `,
   styleUrls: ['./work.component.css'],
@@ -35,7 +47,30 @@ import { ImageService } from './image.service';
 })
 export class WorkComponent implements OnInit, OnDestroy {
   loadedImages: number;
-  get showIcon(): boolean { return window.pageYOffset > 500; }
+  isWindow: boolean = typeof window !== 'undefined';
+  lastY: number = 0;
+  ticking: boolean = false;
+
+  get currentPositionY(): number { return window.pageYOffset; }
+  get info(): number { return Math.ceil(this.lastY); }
+  get showIcon(): boolean { return this.isWindow && this.lastY > 500; }
+
+  updateLastY() {
+    const newY = this.currentPositionY
+    if (newY !== this.lastY) {
+      this.lastY = newY
+    }
+  }
+
+  handleScroll = (e) => {
+    if(!this.ticking) {
+      window.requestAnimationFrame(() => {
+        this.updateLastY()
+        this.ticking = false
+      })
+      this.ticking = true
+    }
+  }
 
   // get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
 
@@ -62,10 +97,14 @@ export class WorkComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    this.isWindow && window.addEventListener('scroll', this.handleScroll);
   }
 
   ngOnDestroy() {
     this.imageService.unobserve();
+
+    this.isWindow && window.removeEventListener('scroll', this.handleScroll);
   }
 
   // ngAfterViewChecked() {

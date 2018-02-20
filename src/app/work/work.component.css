@@ -15,24 +15,36 @@
   position: fixed;
   bottom: 1.5em;
   left: 1em;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: white;
   transform: rotate(-90deg);
-  opacity: 0.3;
+  opacity: 0;
   visibility: hidden;
+  transition: visibility 1.0s linear, opacity 1.0s linear;
+}
+.back-to-top.two {
+  left: 5em;
 }
 .back-to-top:hover {
   cursor: pointer;
 }
 .back-to-top.show {
   visibility: visible;
+  opacity: 0.3;
 }
-
-.info {
+.back-to-top.test {
   position: fixed;
-  bottom: 1.5em;
-  right: 1.5em;
-  /* opacity: 0.3; */
+  bottom: 6em;
+  transform: rotate(0);
+  /* visibility: visible; */
+  opacity: 0.3;
 }
-
+/* 
 a[id="images"]:target ~ div#images {
   -webkit-transform: translateY( 0px);
   transform: translateY( 0px );
@@ -43,4 +55,4 @@ div#imagelink {
   bottom: 15em;
   right: 15em;
   opacity: 0.3;
-}
+} */
