@@ -1,6 +1,10 @@
 # Joanne Lee
 
-This is Joanne's website, shows images of her works. Images are served from the `Firebase storage` and below is the convention to follow when naming and uploading image files:
+This is Joanne's website, shows images of her works. Images are dynamically served from `Firebase storage` and lazily loaded using `IntersectionObserver` API.
+
+<img src="Joanne-profile.PNG" width="60%">
+
+Below is the convention to follow when naming and uploading image files:
 
 - assume the page want to show images in pair - image1 as parent and image2 as child (optional)
 - image2 needs to be square, so crop if required

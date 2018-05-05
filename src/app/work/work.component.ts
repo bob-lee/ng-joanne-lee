@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewChecked, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewChecked, PLATFORM_ID, Inject, NgZone } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { routerTransition, pageAnimation } from '../app.animation';
@@ -26,7 +26,7 @@ import { ImageService } from './image.service';
       [ngClass]="{'show': showIcon}">
       <i class="fa fa-step-forward fa-lg" aria-hidden="true"></i>
     </div>
-*/
+    */
 @Component({
   template: `
     <div class="images">
@@ -59,11 +59,12 @@ export class WorkComponent implements OnInit, OnDestroy {
     const newY = this.currentPositionY
     if (newY !== this.lastY) {
       this.lastY = newY
+      // this.ngZone.run(() => { this.lastY = newY }) // run this inside Angular
     }
   }
 
   handleScroll = (e) => {
-    if(!this.ticking) {
+    if (!this.ticking) {
       window.requestAnimationFrame(() => {
         this.updateLastY()
         this.ticking = false
@@ -71,6 +72,15 @@ export class WorkComponent implements OnInit, OnDestroy {
       this.ticking = true
     }
   }
+  // handleScroll(e) {
+  //   if (!this.ticking) {
+  //     window.requestAnimationFrame(() => {
+  //       this.updateLastY()
+  //       this.ticking = false
+  //     })
+  //     this.ticking = true
+  //   }
+  // }
 
   // get imagesLoaded(): boolean { return /*this.loadedImages &&*/ this.imageService.show.length === this.loadedImages; }
 
@@ -79,7 +89,10 @@ export class WorkComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private route: ActivatedRoute,
     public imageService: ImageService,
-    @Inject(PLATFORM_ID) private platformId: string) { }
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: string) {
+    //this.handleScroll = this.handleScroll.bind(this)
+  }
 
   ngOnInit() {
     console.info(`'WorkComponent'`);
@@ -99,6 +112,7 @@ export class WorkComponent implements OnInit, OnDestroy {
     });
 
     this.isWindow && window.addEventListener('scroll', this.handleScroll);
+    //this.isWindow && this.ngZone.runOutsideAngular(() => { window.addEventListener('scroll', this.handleScroll); });
   }
 
   ngOnDestroy() {
@@ -121,7 +135,7 @@ export class WorkComponent implements OnInit, OnDestroy {
 
   scrollToTop() {
     //console.log('scrollToTop', this.showIcon, this.imageService.indexToObserve, window.pageYOffset);
-    
+
     window.scroll(0, 0);
   }
 
