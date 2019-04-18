@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 // import { ServiceWorkerModule } from '@angular/service-worker';
-//import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { AppComponent } from './app.component';
 import { DropdownComponent } from './dropdown.component';
@@ -43,12 +42,11 @@ export const ROUTES: Routes = [
     ScrollDirective,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-joanne-lee' }),
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     // ServiceWorkerModule,
-    //NgxPageScrollModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [ImageService],

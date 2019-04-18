@@ -28,7 +28,6 @@
     "@angular/http": "^4.2.4",
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
-    "@angular/platform-server": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
     "fs-extra": "^4.0.2",
