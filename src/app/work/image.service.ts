@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { listPortrait } from './image.service.spec';
+//import { listPortrait } from './image.service.spec';
 
 const PAGE_SIZE = 5; // 5 items in a page
 const INTERSECT_PAGESIZE = 2;
