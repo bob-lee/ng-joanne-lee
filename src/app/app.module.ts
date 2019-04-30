@@ -14,7 +14,6 @@ import { WorkComponent } from './work/work.component';
 import { ImageComponent } from './work/image/image.component';
 import { LoaderComponent } from './work/loader/loader.component';
 import { SubmenuComponent } from './work/submenu/submenu.component';
-import { ScrollDirective } from './work/scroll.directive';
 import { NgScrolltopModule } from 'ng-scrolltop';
 
 import { ImageService } from './work/image.service';
@@ -40,7 +39,6 @@ export const ROUTES: Routes = [
     LoaderComponent,
     SubmenuComponent,
     ContactComponent,
-    ScrollDirective,
   ],
   imports: [
     BrowserModule,

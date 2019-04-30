@@ -11,39 +11,6 @@
   scroll-behavior: smooth;
   /* transition: transform 0.6s ease-in-out; */
 }
-.back-to-top {
-  position: fixed;
-  bottom: 1.5em;
-  left: 1em;
-  height: 60px;
-  width: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: white;
-  transform: rotate(-90deg);
-  opacity: 0;
-  visibility: hidden;
-  transition: visibility 1.0s linear, opacity 1.0s linear;
-}
-.back-to-top.two {
-  left: 5em;
-}
-.back-to-top:hover {
-  cursor: pointer;
-}
-.back-to-top.show {
-  visibility: visible;
-  opacity: 0.3;
-}
-.back-to-top.test {
-  position: fixed;
-  bottom: 6em;
-  transform: rotate(0);
-  /* visibility: visible; */
-  opacity: 0.3;
-}
 /* 
 a[id="images"]:target ~ div#images {
   -webkit-transform: translateY( 0px);
