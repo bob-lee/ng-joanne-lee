@@ -1,44 +1,40 @@
 importScripts('/workbox-sw.js');
-//self.workbox.logLevel = self.workbox.LOG_LEVEL.verbose;
+//workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
-const w = new self.WorkboxSW();
-
-self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
-self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
-
-w.precache([]);
+workbox.core.skipWaiting();
+workbox.core.clientsClaim();
+workbox.precaching.precacheAndRoute([]);
 
 // app-shell
-//w.router.registerNavigationRoute('/index.html');
-w.router.registerRoute('/', w.strategies.networkFirst());
-w.router.registerRoute(/^\/$|home|profile|work|contact/, w.strategies.networkFirst());
+workbox.routing.registerRoute('/', new workbox.strategies.NetworkFirst());
+workbox.routing.registerRoute(/^\/$|home|profile|work|contact/, new workbox.strategies.NetworkFirst());
 
 // webfont-cache
-const webFontHandler = w.strategies.cacheFirst({
+const webFontHandler = new workbox.strategies.CacheFirst({
   cacheName: 'webfont-cache',
-  cacheExpiration: {
-    maxEntries: 20
-  },
-  cacheableResponse: { statuses: [0, 200] }
+  plugins: [
+    new workbox.expiration.Plugin({maxEntries: 20}),
+    new workbox.cacheableResponse.Plugin({statuses: [0, 200]}),
+  ],
 });
-w.router.registerRoute('https://fonts.googleapis.com/(.*)', webFontHandler);
-w.router.registerRoute('https://fonts.gstatic.com/(.*)', webFontHandler);
-w.router.registerRoute('https://use.fontawesome.com/(.*)', webFontHandler);
+workbox.routing.registerRoute(/https:\/\/fonts.googleapis.com\/.*/, webFontHandler);
+workbox.routing.registerRoute(/https:\/\/fonts.gstatic.com\/.*/, webFontHandler);
+workbox.routing.registerRoute(/https:\/\/use.fontawesome.com\/.*/, webFontHandler);
 
 // get-urls-cache
-const API = 'https://us-central1-joanne-lee.cloudfunctions.net/getUrls/(.*)';
-const apiHandler = w.strategies.networkFirst({
+const API = /https:\/\/us-central1-joanne-lee.cloudfunctions.net\/getUrls\/.*/;
+const apiHandler = new workbox.strategies.NetworkFirst({
   cacheName: 'get-urls-cache'
 });
-w.router.registerRoute(API, apiHandler);
+workbox.routing.registerRoute(API, apiHandler);
 
 // work-images-cache
-w.router.registerRoute('https://storage.googleapis.com/joanne-lee.appspot.com/(.*)',
-  w.strategies.cacheFirst({
+workbox.routing.registerRoute(/https:\/\/storage.googleapis.com\/joanne-lee.appspot.com\/.*/,
+  new workbox.strategies.CacheFirst({
     cacheName: 'work-images-cache',
-    cacheExpiration: {
-      maxEntries: 60
-    },
-    cacheableResponse: { statuses: [0, 200] }
+    plugins: [
+      new workbox.expiration.Plugin({maxEntries: 60}),
+      new workbox.cacheableResponse.Plugin({statuses: [0, 200]}),
+    ],
   })
 );

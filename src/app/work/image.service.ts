@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-// import * as firebase from 'firebase';
-// import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+//import { listPortrait } from './image.service.spec';
 
 const PAGE_SIZE = 5; // 5 items in a page
 const INTERSECT_PAGESIZE = 2;
@@ -58,7 +58,7 @@ export class ImageService {
     }
   }
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     try {
       this.intersectionObserver = new IntersectionObserver(entries => {
         const entry = entries[0];
@@ -114,66 +114,71 @@ export class ImageService {
     }
   }
 
-  getUrls(path: string, page: number = 1): /*firebase.*/Promise<any> {
-    return this.getFullList2(path || this.group)/*.then(() => {
-      if (page > this.pages) page = 1;
-      const begin = (page - 1) * PAGE_SIZE;
-      this.show = this.list.slice(begin, begin + PAGE_SIZE);
-      this.page = page;
+  async getUrls0(path: string, page: number = 1) {
+    if (path === this.group && this.list.length > 0) {
+      return;
+    }
 
-      console.log(`getUrls(${page}/${this.pages}, ${this.show.length})`);
-      //this.getFullList2(path || this.group);
-    });*/
+    const list = await this.getFullList2(path || this.group).pipe(take(1))
+      .forEach((items) => this.applyToList(items, path));
+    
+    return list;
   }
+  getUrls(path: string, page: number = 1): Observable<any[]> {
+    if (path === this.group && this.list.length > 0) {
+      return;
+    }
+
+    const sub$ = this.getFullList2(path || this.group);
+    sub$.subscribe(items => this.applyToList(items, path));
+    return sub$;
+  }
+
+  private applyToList(items, path): any[] {
+    this.list = [];
+
+    // prepare a list for intersection observer
+    this._indexToObserve = 0;
+    //const items = snapshot;//.json();
+    this.list = items.reverse().map((item, index) => {
+      /* provide 2 additional properties for each image:
+            toLoad: boolean, the component to load image,
+            index: number, the component to call observe(item) on image loaded
+       */
+      item.toLoad = index < (this.indexToObserve + INTERSECT_PAGESIZE);
+      item.index = index;
+      return item;
+    });
+    this.group = path;
+    this.pages = Math.ceil(this.list.length / PAGE_SIZE);
+
+    console.log(`getUrls(${path}) got ${this.list.length} image(s)`);
+
+    return this.list;
+  }
+
   /*
   private getFullList(path: string): firebase.Promise<any[]> {
     if (path === this.group && this.list.length > 0)
       return firebase.Promise.resolve(this.list);
-
     return this.db.ref(path)
       .once('value').then(snapshot => {
         this.list = [];
-
         snapshot.forEach(item => {
           const i = item.val();
           i.showText = true;
           this.list.push(i);
         });
-
         this.list = this.list.reverse(); // latest first
         this.group = path;
         this.pages = Math.ceil(this.list.length / PAGE_SIZE);
-
         console.log(`getFullList(${path}) got ${this.list.length} image(s)`);
       });
   }
   */
-  private getFullList2(path: string): Promise<any> {
-    if (path === this.group && this.list.length > 0) {
-      return Promise.resolve(this.list);
-    }
+  private getFullList2(path: string): Observable<any[]> {
 
-    return this.http.get(`${API}/${path}`).toPromise().then((snapshot) => {
-      this.list = [];
-
-      // prepare a list for intersection observer
-      this._indexToObserve = 0;
-      const items = snapshot.json();
-      this.list = items.reverse().map((item, index) => {
-        /* provide 2 additional properties for each image:
-              toLoad: boolean, the component to load image,
-              index: number, the component to call observe(item) on image loaded
-         */
-        item.toLoad = index < (this.indexToObserve + INTERSECT_PAGESIZE);
-        item.index = index;
-        return item;
-      });
-      this.group = path;
-      this.pages = Math.ceil(this.list.length / PAGE_SIZE);
-
-      console.log(`getFullList2(${path}) got ${this.list.length} image(s)`);
-      return this.list;
-    });
+    return this.http.get<any[]>(`${API}/${path}`);
   }
 
   /*

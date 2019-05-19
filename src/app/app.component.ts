@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 // import { NgServiceWorker } from '@angular/service-worker';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+import { filter } from 'rxjs/operators';
 import { routerTransition } from './app.animation';
 
 @Component({
@@ -44,7 +43,7 @@ export class AppComponent implements OnInit {
 
 
     this.router.events
-      .filter(event => event instanceof NavigationEnd)
+      .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         console.log('NavigationEnd', event);
 

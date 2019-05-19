@@ -1,5 +1,6 @@
 
 'use strict';
+/*
 const angularUniversal = require('angular-universal-express-firebase');
 exports.trigger = angularUniversal.trigger({
   index: __dirname + '/dist/index.html',
@@ -10,7 +11,7 @@ exports.trigger = angularUniversal.trigger({
   browserCacheExpiry: 300, // cache in the browser for 5 minutes
   staleWhileRevalidate: 120 // serve a stale version for 2 minutes after cdnCacheExpiry, but refresh CDN in background
 });
-
+*/
 /* image file naming / uploading convention
 
   0. assume the page want to show images in pair - image1 as parent and image2 as child (optional)
@@ -24,6 +25,13 @@ exports.trigger = angularUniversal.trigger({
   3. upload webp version of image1, function to record its url in database.webpUrl
   4. upload image2, function to convert to thumb, record its url in database.thumbUrl
   5. The 'illustration' page to look for images' urls under 'illustration' in database
+
+  Note 1. image1 to upload to be smaller than 500KB
+  Note 2. recommend to use GIMP to crop and scale, then use tinyjpg.com to compress to get a file to upload
+  Note 3. if circular image required, copy selection of image and paste to a new image with transparent background, then exports as png
+  Note 4. if image1 is uploaded and 'recordUrl' function worked ok, database should have a new record with filename and url
+  Note 5. if required, add 'text' field to the record with a string to be shown under the image
+  Note 6. last added image will be shown first at top, so if order needs to change, multiple delete / add may need
 */
 
 const functions = require('firebase-functions');
@@ -49,9 +57,10 @@ const THUMB_PREFIX = 'thumb_'; // converted thumb file of image2 would have this
 const WEBP_EXT = 'webp';
 const WEBP_QUALITY = 80;
 
-exports.recordUrl = functions.storage.object().onChange(event => {
+exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
+  const metageneration = object.metageneration; // string type
   // File and directory paths.
-  const filePath = event.data.name; // 'illustration/Sarah.jpg'
+  const filePath = object.name; // 'illustration/Sarah.jpg'
   const fileDir = path.dirname(filePath); // 'illustration'
   const fileName = path.basename(filePath); // e.g. 'Sarah.jpg' or 'of_Sarah.jpg.jpg'
   const fileExt = fileName.split('.').splice(-1).join().toLowerCase();
@@ -59,24 +68,21 @@ exports.recordUrl = functions.storage.object().onChange(event => {
   const isThumb = fileName.startsWith(THUMB_PREFIX);
 
   // Exit if this is triggered on a file that is not an image.
-  if (!event.data.contentType.startsWith('image/')) {
-    //console.log('This is not an image.');
-    return;
+  if (!object.contentType.startsWith('image/')) {
+    return console.log('This is not an image, ', object.contentType);
   }
 
   // Exit if this is a move or deletion event.
-  if (event.data.resourceState === 'not_exists') {
-    //console.log('This is a deletion event.');
-    return;
+  if (metageneration != 1) {
+    return console.log('This is not a creation event. metageneration = ', metageneration);
   }
 
   if (isThumb) {
-    //console.log('This is thumb.');
-    return;
+    return console.log('This is thumb.');
   }
 
   // Cloud Storage files.
-  const bucket = gcs.bucket(event.data.bucket);
+  const bucket = gcs.bucket(object.bucket);
   const file = bucket.file(filePath);
 
   // Get the Signed URLs for the thumbnail and original image.
@@ -116,9 +122,6 @@ exports.recordUrl = functions.storage.object().onChange(event => {
       return file.getSignedUrl(config, function (err, url) {
         admin.database().ref(fileDir).push({ fileName: fileName, url: url })
           .then(_ => console.log(`recorded url of '${fileName}' ok`));
-        
-        // await admin.database().ref(fileDir).push({ fileName: fileName, url: url });
-        // console.log(`recorded url of '${fileName}' ok`);
       });
     }
 

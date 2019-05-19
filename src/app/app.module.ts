@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 // import { ServiceWorkerModule } from '@angular/service-worker';
-//import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { AppComponent } from './app.component';
 import { DropdownComponent } from './dropdown.component';
@@ -15,7 +14,7 @@ import { WorkComponent } from './work/work.component';
 import { ImageComponent } from './work/image/image.component';
 import { LoaderComponent } from './work/loader/loader.component';
 import { SubmenuComponent } from './work/submenu/submenu.component';
-import { ScrollDirective } from './work/scroll.directive';
+import { NgScrolltopModule } from 'ng-scrolltop';
 
 import { ImageService } from './work/image.service';
 
@@ -40,15 +39,14 @@ export const ROUTES: Routes = [
     LoaderComponent,
     SubmenuComponent,
     ContactComponent,
-    ScrollDirective,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-joanne-lee' }),
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     // ServiceWorkerModule,
-    //NgxPageScrollModule,
+    NgScrolltopModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [ImageService],

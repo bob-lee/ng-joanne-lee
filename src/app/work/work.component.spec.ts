@@ -16,7 +16,7 @@ import {
 } from '@angular/router';
 import { ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 import { WorkComponent } from './work.component';
 import { ImageService } from './image.service';
