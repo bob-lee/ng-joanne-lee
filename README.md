@@ -1,6 +1,6 @@
 # Joanne Lee
 
-This is Joanne's website, shows images of her works. Images are dynamically served from `Firebase storage` and lazily loaded using `IntersectionObserver` API.
+This is Joanne's website, shows images of her works. Images are dynamically served from `Firebase storage` and lazily loaded using `IntersectionObserver` API. All resources are cached by `workbox` service worker that makes the web to work fast even when user lost the internet.
 
 <img src="Joanne-profile.PNG" width="60%">
 
@@ -36,7 +36,7 @@ ng serve
 // to run tests
 ng test
 // to build for production
-npm run build:workbox
+npm run build
 // to test on localhost:5000 with production build
 npm run serve
 ```
