@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { animate, AnimationBuilder, style } from '@angular/animations';
 import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
@@ -13,21 +12,9 @@ export class ImageComponent implements OnInit {
   @Output() load: EventEmitter<any> = new EventEmitter();
   imageLoaded: boolean = false;
 
-  // @ViewChild('showhide') showHideEl: ElementRef;
-  // height: number;
-  // element: any;
-
-  constructor(public el: ElementRef/*private animBuilder: AnimationBuilder*/) { }
+  constructor(public el: ElementRef) { }
 
   ngOnInit() {
-    /*
-    this.element = this.showHideEl.nativeElement;
-    if (!this.image.showText) { // hide
-      this.element.style.opacity = 0;
-      this.element.style.height = 0;
-    }
-    this.height = this.image.thumbUrl ? 80 : this.image.text ? 80 : 0; // value copied from component css
-    */
   }
 
   loaded(image) {
@@ -35,21 +22,4 @@ export class ImageComponent implements OnInit {
     image.element = this.el.nativeElement;
     this.load.emit(image);
   }
-  /*
-  toggle() {
-
-    const showing = this.image.showText;
-    this.image.showText = !showing;
-
-    if (this.height === 0) return;
-
-    const time = '0.8s ease-in-out';
-    const factory = this.animBuilder.build([
-      showing ? animate(time, style({ opacity: 0, height: 0 })) :
-      animate(time, style({ opacity: 1, height: this.height + 'px' }))
-    ]);
-    const player = factory.create(this.element);
-    player.play();
-  }
-  */
 }
