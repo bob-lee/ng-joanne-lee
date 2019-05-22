@@ -3,6 +3,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { routerTransition, pageAnimation } from '../app.animation';
 import { ImageService } from './image.service';
+import { NgScrolltopService } from 'ng-scrolltop';
+
 
 /*
   <div [@routerTransition]="getState(o)" style="background-color: #eee;">
@@ -44,12 +46,15 @@ export class WorkComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private route: ActivatedRoute,
     public imageService: ImageService,
+    private ngScrolltopService: NgScrolltopService,
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: string) {
   }
 
   ngOnInit() {
     console.info(`'WorkComponent'`);
+
+    //this.ngScrolltopService.setDevMode();
 
     //this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
 
