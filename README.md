@@ -1,6 +1,6 @@
 # Joanne Lee
 
-This is Joanne's website, shows images of her works. Images are dynamically served from `Firebase storage` and lazily loaded using `IntersectionObserver` API. All resources are cached by `workbox` service worker that makes the web to work fast even when user lost the internet.
+This is Joanne's website, shows her works. Images are dynamically served from `Firebase storage` and lazily loaded using `IntersectionObserver` API. All resources are cached by `workbox` service worker that makes the web faster on next visit and even when user lost the internet.
 
 <img src="Joanne-profile.PNG" width="60%">
 
@@ -18,25 +18,23 @@ Below is the convention to follow when naming and uploading image files:
 
 The website was built and deployed using following technologies: 
 * [Angular](https://angular.io/): frontend framework
-* ~~[Angular Mobile Toolkit](https://github.com/angular/mobile-toolkit): progressive web app and service worker for offline capability~~
 * [Workbox](https://workboxjs.org/): JavaScript libraries for Progressive Web Apps
-
 * [Firebase](https://firebase.google.com/): cloud infrastructure for database, storage, fucntions and hosting
 * [Node.js](https://nodejs.org): JavaScript runtime environment
 
 [Visit the web!](https://joanne-lee.firebaseapp.com/home)
 
-For development, run `npm run build:workbox` to build and run `npm run serve` to test it on `localhost:5000` or run `firebase deploy` to deploy the web.
+For development, run `yarn serve` to build and test it on `localhost:5000` or run `firebase deploy` to deploy the web.
 
 ```
 // to install dependencies
-npm i
+yarn
 // to debug on localhost:4200
 ng serve
 // to run tests
 ng test
 // to build for production
-npm run build
+yarn build
 // to test on localhost:5000 with production build
-npm run serve
+yarn serve
 ```
