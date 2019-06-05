@@ -120,7 +120,7 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
       });
     } else { // image 1 uploaded, record its url into database.url
       return file.getSignedUrl(config, function (err, url) {
-        admin.database().ref(fileDir).push({ fileName: fileName, url: url })
+        admin.database().ref(fileDir).push({ fileName: fileName, url: url, text: '', order: '-' })
           .then(_ => console.log(`recorded url of '${fileName}' ok`));
       });
     }
@@ -198,6 +198,24 @@ exports.getUrls = functions.https.onRequest((req, res) => {
     const group = params[1];
   
     admin.database().ref(group).once('value')
+      .then(snapshot => {
+        const list = [];
+        snapshot.forEach(item => {
+          const i = item.val();
+          list.push(i);
+        });
+        //console.log('getUrls', group, list.length);
+        res.status(200).json(list);
+      });
+  });
+});
+
+exports.getUrlsOrdered = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    const params = req.url.split('/');
+    const group = params[1];
+  
+    admin.database().ref(group).orderByChild('order').once('value')
       .then(snapshot => {
         const list = [];
         snapshot.forEach(item => {
