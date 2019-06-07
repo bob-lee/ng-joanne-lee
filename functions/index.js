@@ -37,12 +37,12 @@ exports.trigger = angularUniversal.trigger({
 const functions = require('firebase-functions');
 const mkdirp = require('mkdirp-promise');
 // Include a Service Account Key to use a Signed URL
-const gcs = require('@google-cloud/storage')({ 
+const gcs = require('@google-cloud/storage')({
   keyFilename: 'service-account-credentials.json',
   projectId: 'joanne-lee'
 });
 const admin = require('firebase-admin');
-const cors = require('cors')({origin: true});
+const cors = require('cors')({ origin: true });
 admin.initializeApp(functions.config().firebase);
 const spawn = require('child-process-promise').spawn;
 const path = require('path');
@@ -56,6 +56,29 @@ const CONVERT_PREFIX = 'of_'; // image2 file would have this prefix, e.g. 'of_Sa
 const THUMB_PREFIX = 'thumb_'; // converted thumb file of image2 would have this prefix, e.g. 'thumb_of_Sarah.jpg.jpg'
 const WEBP_EXT = 'webp';
 const WEBP_QUALITY = 80;
+
+exports.deleteUrl = functions.storage.object().onDelete(async (object) => {
+  const filePath = object.name; // 'illustration/Sarah.jpg'
+  const fileDir = path.dirname(filePath); // 'illustration'
+  const fileName = path.basename(filePath); // e.g. 'Sarah.jpg' or 'of_Sarah.jpg.jpg'
+
+  const folder = admin.database().ref(fileDir)
+  const snap = await folder
+    .orderByChild('fileName')
+    .equalTo(fileName)
+    .once('value')
+
+  snap.forEach(async i => {
+    const item = folder.child(`${i.key}`);
+    try {
+      await item.remove()
+      console.log(`found a record(${i.key}) and removed ok`)
+    } catch (err) {
+      console.error(`found a record(${i.key}) but failed to remove: ${err.message}`)
+    }
+  });
+  return console.log('deleteUrl:', fileDir, fileName);
+});
 
 exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
   const metageneration = object.metageneration; // string type
@@ -120,7 +143,7 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
       });
     } else { // image 1 uploaded, record its url into database.url
       return file.getSignedUrl(config, function (err, url) {
-        admin.database().ref(fileDir).push({ fileName: fileName, url: url })
+        admin.database().ref(fileDir).push({ fileName: fileName, url: url, text: '', order: '-' })
           .then(_ => console.log(`recorded url of '${fileName}' ok`));
       });
     }
@@ -196,7 +219,7 @@ exports.getUrls = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const params = req.url.split('/');
     const group = params[1];
-  
+
     admin.database().ref(group).once('value')
       .then(snapshot => {
         const list = [];
@@ -207,5 +230,18 @@ exports.getUrls = functions.https.onRequest((req, res) => {
         //console.log('getUrls', group, list.length);
         res.status(200).json(list);
       });
+  });
+});
+
+exports.getUrlsOrdered = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
+    const params = req.url.split('/');
+    const group = params[1];
+    const snapshot = await admin.database().ref(group).orderByChild('order').once('value')
+    const list = []
+    snapshot.forEach(item => {
+      list.push(item.val())
+    })
+    res.status(200).json(list)
   });
 });

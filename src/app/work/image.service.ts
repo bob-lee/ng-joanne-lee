@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 
 const PAGE_SIZE = 5; // 5 items in a page
 const INTERSECT_PAGESIZE = 2;
-const API = 'https://us-central1-joanne-lee.cloudfunctions.net/getUrls';
+const API = 'https://us-central1-joanne-lee.cloudfunctions.net/getUrlsOrdered';
 /*
 export enum OrderBy {
   key,
