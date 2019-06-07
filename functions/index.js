@@ -234,19 +234,14 @@ exports.getUrls = functions.https.onRequest((req, res) => {
 });
 
 exports.getUrlsOrdered = functions.https.onRequest((req, res) => {
-  cors(req, res, () => {
+  cors(req, res, async () => {
     const params = req.url.split('/');
     const group = params[1];
-
-    admin.database().ref(group).orderByChild('order').once('value')
-      .then(snapshot => {
-        const list = [];
-        snapshot.forEach(item => {
-          const i = item.val();
-          list.push(i);
-        });
-        //console.log('getUrls', group, list.length);
-        res.status(200).json(list);
-      });
+    const snapshot = await admin.database().ref(group).orderByChild('order').once('value')
+    const list = []
+    snapshot.forEach(item => {
+      list.push(item.val())
+    })
+    res.status(200).json(list)
   });
 });
