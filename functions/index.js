@@ -245,3 +245,14 @@ exports.getUrlsOrdered = functions.https.onRequest((req, res) => {
     res.status(200).json(list)
   });
 });
+
+const express = require('express');
+const app = express();
+app.get('**', (req, res) => {
+  const requestUrl = req.url === '/home' ? '/' : req.url
+  const toUrl = `https://react-joanne.web.app${requestUrl}`;
+  console.log(`moveToReactJoanne: '${toUrl}'`)
+  res.redirect(301, toUrl);
+})
+let moveToReactJoanne = functions.https.onRequest(app);
+exports.moveToReactJoanne = moveToReactJoanne;
