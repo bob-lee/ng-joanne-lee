@@ -37,13 +37,14 @@ exports.trigger = angularUniversal.trigger({
 const functions = require('firebase-functions');
 const mkdirp = require('mkdirp-promise');
 // Include a Service Account Key to use a Signed URL
-const gcs = require('@google-cloud/storage')({
-  keyFilename: 'service-account-credentials.json',
-  projectId: 'joanne-lee'
-});
+// Recent firebase-admin SDK doesn't require gcs: https://github.com/firebase/functions-samples/blob/Node-8/generate-thumbnail/functions/index.js
+// const gcs = require('@google-cloud/storage')({
+//   keyFilename: 'service-account-credentials.json',
+//   projectId: 'joanne-lee'
+// });
 const admin = require('firebase-admin');
+admin.initializeApp(/*functions.config().firebase*/);
 const cors = require('cors')({ origin: true });
-admin.initializeApp(functions.config().firebase);
 const spawn = require('child-process-promise').spawn;
 const path = require('path');
 const os = require('os');
@@ -105,7 +106,7 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
   }
 
   // Cloud Storage files.
-  const bucket = gcs.bucket(object.bucket);
+  const bucket = admin.storage().bucket(object.bucket);
   const file = bucket.file(filePath);
 
   // Get the Signed URLs for the thumbnail and original image.
