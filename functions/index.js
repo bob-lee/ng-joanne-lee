@@ -42,8 +42,21 @@ const mkdirp = require('mkdirp-promise');
 //   keyFilename: 'service-account-credentials.json',
 //   projectId: 'joanne-lee'
 // });
+
 const admin = require('firebase-admin');
 admin.initializeApp(/*functions.config().firebase*/);
+
+// 28Aug21 trying new service account
+// const serviceAccount = require("c:/Users/Bob/Work/ng-joanne-lee/functions/service-account-credentials.json");
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://joanne-lee.firebaseio.com"
+// });
+// admin.initializeApp({
+//   credential: admin.credential.applicationDefault(),
+//   databaseURL: 'https://joanne-lee.firebaseio.com'
+// });
+
 const cors = require('cors')({ origin: true });
 const spawn = require('child-process-promise').spawn;
 const path = require('path');
@@ -102,7 +115,7 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
   }
 
   if (isThumb) {
-    return console.log('This is thumb.');
+    return console.log(`This is a thumb, "${filePath}"`);
   }
 
   // Cloud Storage files.

@@ -5,8 +5,8 @@
     "child-process-promise": "^2.2.0",
     "cors": "^2.8.4",
     "express": "^4.17.1",
-    "firebase-admin": "^8.9.2",
-    "firebase-functions": "^3.3.0",
+    "firebase-admin": "^9.11.1",
+    "firebase-functions": "^3.15.4",
     "mkdirp": "^0.5.1",
     "mkdirp-promise": "^4.0.0"
   },
@@ -15,6 +15,6 @@
   },
   "private": true,
   "devDependencies": {
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.3.2"
   }
 }
