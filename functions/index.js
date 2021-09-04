@@ -31,7 +31,7 @@ exports.trigger = angularUniversal.trigger({
   Note 3. if circular image required, copy selection of image and paste to a new image with transparent background, then exports as png
   Note 4. if image1 is uploaded and 'recordUrl' function worked ok, database should have a new record with filename and url
   Note 5. if required, add 'text' field to the record with a string to be shown under the image
-  Note 6. last added image will be shown first at top, so if order needs to change, multiple delete / add may need
+  Note 6. if required, add 'order' field to the record, like 'i01', or 'i01 hide' to hide image
 */
 
 const functions = require('firebase-functions');
@@ -253,10 +253,15 @@ exports.getUrlsOrdered = functions.https.onRequest((req, res) => {
     const group = params[1];
     const snapshot = await admin.database().ref(group).orderByChild('order').once('value')
     const list = []
+    const countHide = 0
     snapshot.forEach(item => {
       list.push(item.val())
     })
-    res.status(200).json(list)
+
+    const filtered = list.filter(x => !x.order.endsWith('hide'))
+    console.log(`${filtered.length}/${list.length} image(s)`)
+
+    res.status(200).json(filtered)
   });
 });
 
