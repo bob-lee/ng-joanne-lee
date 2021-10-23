@@ -125,7 +125,8 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
   // Get the Signed URLs for the thumbnail and original image.
   const config = {
     action: 'read',
-    expires: '03-01-2500'
+    expires: '03-01-2500',
+    version: 'v2'
   };
 
   if (!toConvert) { // image 1
