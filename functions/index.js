@@ -133,7 +133,9 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
     if (fileExt === 'webp') { // webp version of image1 uploaded, find in database and record its url into database.webpUrl
       const originalName = fileName.split('.').slice(0, -1).join('.'); // get 'Sarah.jpg' from 'Sarah.jpg.webp'
 
-      return file.getSignedUrl(config, function (err, url) {
+      return file.makePublic(function(err, apiResponse) {
+        const url = file.publicUrl()
+
         let key;
         admin.database().ref(fileDir)
           .orderByChild('fileName')
@@ -157,10 +159,16 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
           });
       });
     } else { // image 1 uploaded, record its url into database.url
-      return file.getSignedUrl(config, function (err, url) {
-        admin.database().ref(fileDir).push({ fileName: fileName, url: url, text: '', order: '-' })
+      return file.makePublic(function(err, apiResponse) {
+        const url = file.publicUrl()
+        // console.log('publicUrl: ', url, apiResponse)
+        admin.database().ref(fileDir).push({ fileName: fileName, url, text: fileName, order: '-' })
           .then(_ => console.log(`recorded url of '${fileName}' ok`));
       });
+      // return file.getSignedUrl(config, function (err, url) {
+      //   admin.database().ref(fileDir).push({ fileName: fileName, url: url, text: '', order: '-' })
+      //     .then(_ => console.log(`recorded url of '${fileName}' ok`));
+      // });
     }
 
   }
@@ -196,7 +204,10 @@ exports.recordUrl = functions.storage.object().onFinalize(async (object) => {
 
     // Get the Signed URLs for the thumbnail and original image.
     return Promise.all([
-      thumbFile.getSignedUrl(config),
+      // thumbFile.getSignedUrl(config),
+      thumbFile.makePublic().then(function (data) {
+        return thumbFile.publicUrl()
+      })
     ]);
   }).then(results => {
     const originalResult = results[0];
